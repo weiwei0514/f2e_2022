@@ -7,9 +7,9 @@ import Week3 from "./Week3"
 const RouterView = () => {
   return (
     <Routes>
-      <Route path="/week1" element={<Week1 />} />
-      <Route path="/week2" element={<Week2 />} />
-      <Route path="/week3" element={<Week3 />} />
+      <Route path="/week1" element={<Week1 title={"The F2E 活動網站設計"}/>} />
+      <Route path="/week2" element={<Week2 title={"今晚，我想來點點簽"}/>} />
+      <Route path="/week3" element={<Week3 title={"Scrum 新手村"}/>} />
     </Routes>
   )
 }

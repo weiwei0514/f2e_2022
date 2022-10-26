@@ -1,9 +1,9 @@
 import React from 'react'
 
-const index = () => {
+const Week3 = () => {
   return (
     <div>week3</div>
   )
 }
 
-export default index
+export default Week3

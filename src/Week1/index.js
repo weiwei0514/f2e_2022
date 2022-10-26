@@ -1,9 +1,11 @@
 import React from "react"
 import styled from "styled-components"
+import { useTitle } from "../useHooks"
 
-const index = () => {
-  return <Week1>week1</Week1>
+const Week1 = ({ title }) => {
+  useTitle(title)
+  return <Week1Wrapper>week1Wrapper</Week1Wrapper>
 }
 
-const Week1 = styled.div``
-export default index
+const Week1Wrapper = styled.div``
+export default Week1
