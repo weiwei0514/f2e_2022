@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState, useCallback } from "react"
 import styled from "styled-components"
-import { useTitle } from "../useHooks"
+import { useWindowDimensions } from "../useHooks"
 
-const Week2 = ({ title }) => {
-  useTitle(title)
+const Week2 = () => {
   const [isPainting, setIsPainting] = useState(false)
   const [signatureImg, setSignatureImg] = useState("")
+  const wrapperRef = useRef(null)
   const canvasRef = useRef(null)
-  const ctx = canvasRef.current && canvasRef.current.getContext("2d")
-
+  const ctxRef = useRef(null)
+  const windowWidth = useWindowDimensions().width
   // 開始繪圖時，將狀態開啟
   const startPosition = (e) => {
     e.preventDefault()
@@ -18,8 +18,8 @@ const Week2 = ({ title }) => {
   // 結束繪圖時，將狀態關閉，並產生新路徑
   const finishedPosition = useCallback(() => {
     setIsPainting(false)
-    ctx.beginPath()
-  }, [ctx])
+    ctxRef.current.beginPath()
+  }, [])
 
   // 取得滑鼠 / 手指在畫布上的位置
   const getPaintPosition = useCallback((e) => {
@@ -47,14 +47,19 @@ const Week2 = ({ title }) => {
       const paintPosition = getPaintPosition(e)
 
       // 移動滑鼠位置並產生圖案
-      ctx.lineTo(paintPosition.x, paintPosition.y)
-      ctx.stroke()
+      ctxRef.current.lineTo(paintPosition.x, paintPosition.y)
+      ctxRef.current.stroke()
     },
-    [getPaintPosition, ctx, isPainting]
+    [getPaintPosition, isPainting]
   )
   // 重新設定畫布
   const resetCanvas = () => {
-    ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
+    ctxRef.current.clearRect(
+      0,
+      0,
+      canvasRef.current.width,
+      canvasRef.current.height
+    )
   }
 
   // 產生簽名圖檔
@@ -64,42 +69,49 @@ const Week2 = ({ title }) => {
     setSignatureImg(newImg)
     localStorage.setItem("img", newImg)
   }
+
+  // 畫布設定
   useEffect(() => {
-    const canvasControl = canvasRef.current
+    const canvas = canvasRef.current
+    canvas.width = wrapperRef.current.clientWidth
+    canvas.height = 300
+    canvas.style.width = `${wrapperRef.current.clientWidth}px`
+    canvas.style.height = "300px"
+
+    const ctx = canvas.getContext("2d")
+    ctx.lineWidth = 2
+    ctx.lineCap = "round"
+    ctxRef.current = ctx
+  }, [windowWidth])
+
+  useEffect(() => {
+    const canvas = canvasRef.current
     // event listener 電腦板
-    canvasControl.addEventListener("mousedown", startPosition)
-    canvasControl.addEventListener("mouseup", finishedPosition)
-    canvasControl.addEventListener("mouseleave", finishedPosition)
-    canvasControl.addEventListener("mousemove", draw)
+    canvas.addEventListener("mousedown", startPosition)
+    canvas.addEventListener("mouseup", finishedPosition)
+    canvas.addEventListener("mouseleave", finishedPosition)
+    canvas.addEventListener("mousemove", draw)
     // event listener 手機板
-    canvasControl.addEventListener("touchstart", startPosition)
-    canvasControl.addEventListener("touchend", finishedPosition)
-    canvasControl.addEventListener("touchcancel", finishedPosition)
-    canvasControl.addEventListener("touchmove", draw)
+    canvas.addEventListener("touchstart", startPosition)
+    canvas.addEventListener("touchend", finishedPosition)
+    canvas.addEventListener("touchcancel", finishedPosition)
+    canvas.addEventListener("touchmove", draw)
     return () => {
       // event listener 電腦板
-      canvasControl.removeEventListener("mousedown", startPosition)
-      canvasControl.removeEventListener("mouseup", finishedPosition)
-      canvasControl.removeEventListener("mouseleave", finishedPosition)
-      canvasControl.removeEventListener("mousemove", draw)
+      canvas.removeEventListener("mousedown", startPosition)
+      canvas.removeEventListener("mouseup", finishedPosition)
+      canvas.removeEventListener("mouseleave", finishedPosition)
+      canvas.removeEventListener("mousemove", draw)
       // event listener 手機板
-      canvasControl.removeEventListener("touchstart", startPosition)
-      canvasControl.removeEventListener("touchend", finishedPosition)
-      canvasControl.removeEventListener("touchcancel", finishedPosition)
-      canvasControl.removeEventListener("touchmove", draw)
+      canvas.removeEventListener("touchstart", startPosition)
+      canvas.removeEventListener("touchend", finishedPosition)
+      canvas.removeEventListener("touchcancel", finishedPosition)
+      canvas.removeEventListener("touchmove", draw)
     }
   }, [draw, finishedPosition])
 
-  // 設定線條的相關數值
-  useEffect(() => {
-    if (ctx) {
-      ctx.lineWidth = 2
-      ctx.lineCap = "round"
-    }
-  }, [ctx])
-
   return (
-    <Week2Wrapper>
+    <Week2Wrapper ref={wrapperRef}>
       <canvas ref={canvasRef} />
       <div className="btn-group">
         <button className="clear" onClick={resetCanvas}>
@@ -114,14 +126,9 @@ const Week2 = ({ title }) => {
   )
 }
 const Week2Wrapper = styled.div`
+  width: 100%;
   canvas {
-    width: 500px;
-    height: 300px;
     border: 1px solid #000;
-    @media only screen and (max-width: 600px) {
-      width: 100%;
-      height: 300px;
-    }
   }
   .btn-group {
   }

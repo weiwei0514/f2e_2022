@@ -1,9 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import { useTitle } from "../useHooks"
 
-const Week1 = ({ title }) => {
-  useTitle(title)
+const Week1 = () => {
+
   return <Week1Wrapper>week1Wrapper</Week1Wrapper>
 }
 
