@@ -10,7 +10,8 @@ const Week2 = ({ title }) => {
   const ctx = canvasRef.current && canvasRef.current.getContext("2d")
 
   // 開始繪圖時，將狀態開啟
-  const startPosition = () => {
+  const startPosition = (e) => {
+    e.preventDefault()
     setIsPainting(true)
   }
 
@@ -117,6 +118,10 @@ const Week2Wrapper = styled.div`
     width: 500px;
     height: 300px;
     border: 1px solid #000;
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+      height: 300px;
+    }
   }
   .btn-group {
   }
