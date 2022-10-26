@@ -5,6 +5,7 @@ import { useTitle } from "../useHooks"
 const Week2 = ({ title }) => {
   useTitle(title)
   const [isPainting, setIsPainting] = useState(false)
+  const [signatureImg, setSignatureImg] = useState("")
   const canvasRef = useRef(null)
   const ctx = canvasRef.current && canvasRef.current.getContext("2d")
 
@@ -55,6 +56,13 @@ const Week2 = ({ title }) => {
     ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
   }
 
+  // 產生簽名圖檔
+  const saveImage = () => {
+    // 圖片儲存的類型選擇 png ，並將值放入 img 的 src
+    const newImg = canvasRef.current.toDataURL("image/png")
+    setSignatureImg(newImg)
+    localStorage.setItem("img", newImg)
+  }
   useEffect(() => {
     const canvasControl = canvasRef.current
     // event listener 電腦板
@@ -96,8 +104,11 @@ const Week2 = ({ title }) => {
         <button className="clear" onClick={resetCanvas}>
           Clear
         </button>
-        <button className="save">Save</button>
+        <button className="save" onClick={saveImage}>
+          Save
+        </button>
       </div>
+      <img alt="" src={signatureImg} />
     </Week2Wrapper>
   )
 }
