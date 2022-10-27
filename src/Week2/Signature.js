@@ -26,7 +26,6 @@ const Signature = () => {
   // 結束繪圖時，將狀態關閉，並產生新路徑
   const finishedPosition = () => {
     setIsPainting(false)
-    ctxRef.current.save()
   }
 
   // 取得滑鼠 / 手指在畫布上的位置
@@ -82,8 +81,7 @@ const Signature = () => {
    */
   const handleStrokeColor = (value) => {
     ctxRef.current.strokeStyle  = value
-    ctxRef.current.stroke()
-    ctxRef.current.restore()
+    // ctxRef.current.stroke()
   }
 
   // 畫布初始化
