@@ -2,30 +2,37 @@ import React, { useEffect, useRef, useState, useCallback } from "react"
 import styled from "styled-components"
 import { useWindowDimensions } from "../useHooks"
 
+const colorMap = {
+  block: '#000',
+  blue: '#1b7ced',
+  red: '#ff0000'
+}
+
 const Signature = () => {
   const [isPainting, setIsPainting] = useState(false)
   const [signatureImg, setSignatureImg] = useState("")
-  const [color, setColor] = useState("#000")
   const wrapperRef = useRef(null)
   const canvasRef = useRef(null)
-  const [canvas, setCanvas] = useState(null)
-  const [ctx, setCtx] = useState(null)
+  const ctxRef = useRef(null)
   const windowWidth = useWindowDimensions().width
+
   // 開始繪圖時，將狀態開啟
-  const startPosition = (e) => {
+  const startPosition = useCallback((e) => {
     e.preventDefault()
     setIsPainting(true)
-  }
+    ctxRef.current.beginPath()
+  }, [])
 
   // 結束繪圖時，將狀態關閉，並產生新路徑
-  const finishedPosition = useCallback(() => {
+  const finishedPosition = () => {
     setIsPainting(false)
-    ctx.beginPath()
-  }, [ctx])
+    ctxRef.current.save()
+  }
 
   // 取得滑鼠 / 手指在畫布上的位置
   const getPaintPosition = useCallback((e) => {
     const canvasSize = canvasRef.current.getBoundingClientRect()
+
     if (e.type === "mousemove") {
       return {
         x: e.clientX - canvasSize.left,
@@ -49,48 +56,53 @@ const Signature = () => {
       const paintPosition = getPaintPosition(e)
 
       // 移動滑鼠位置並產生圖案
-      ctx.lineTo(paintPosition.x, paintPosition.y)
-      ctx.stroke()
+      ctxRef.current.lineTo(paintPosition.x, paintPosition.y)
+      ctxRef.current.stroke()
     },
     [getPaintPosition, isPainting]
   )
+
   // 重新設定畫布
   const resetCanvas = () => {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    ctxRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
   }
 
   // 產生簽名圖檔
   const saveImage = () => {
     // 圖片儲存的類型選擇 png ，並將值放入 img 的 src
-    const newImg = canvas.toDataURL("image/png")
+    const newImg = canvasRef.current.toDataURL("image/png")
     setSignatureImg(newImg)
     localStorage.setItem("img", newImg)
   }
+
+  /**
+   * 處理canvas線條顏色
+   *
+   * @param {string} value 顏色
+   */
+  const handleStrokeColor = (value) => {
+    ctxRef.current.strokeStyle  = value
+    ctxRef.current.stroke()
+    ctxRef.current.restore()
+  }
+
   // 畫布初始化
   useEffect(() => {
-    const c = canvasRef.current
-    setCanvas(c)
-    if (c) setCtx(c.getContext("2d"))
-  }, [canvasRef])
+    const canvas = canvasRef.current
 
-  // 畫布設定
-  useEffect(() => {
-    if (canvas && ctx) {
-      canvas.width = wrapperRef.current.clientWidth
-      canvas.height = 300
-      canvas.style.width = `${wrapperRef.current.clientWidth}px`
-      canvas.style.height = "300px"
+    canvas.width = wrapperRef.current.clientWidth
+    canvas.height = 300
+    canvas.style.width = `${wrapperRef.current.clientWidth}px`
+    canvas.style.height = "300px"
 
-      ctx.lineWidth = 2
-      ctx.lineCap = "round"
-    }
-  }, [windowWidth, canvas, ctx])
+    const context = canvas.getContext('2d')
 
-  useEffect(() => {
-    if (ctx) {
-      ctx.strokeStyle = color
-    }
-  }, [color, ctx])
+    context.strokeStyle = colorMap.block
+    context.lineWidth = 2
+    context.lineCap = "round"
+
+    ctxRef.current = context
+  }, [windowWidth])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -116,27 +128,20 @@ const Signature = () => {
       canvas.removeEventListener("touchcancel", finishedPosition)
       canvas.removeEventListener("touchmove", draw)
     }
-  }, [draw, finishedPosition])
+  }, [draw, startPosition])
 
   return (
     <SignatureWrapper ref={wrapperRef}>
       <canvas ref={canvasRef} />
       <div className="color-group">
-        <div
-          className="circle"
-          style={{ backgroundColor: "#000" }}
-          onClick={(e) => setColor(e.target.style.backgroundColor)}
-        />
-        <div
-          className="circle"
-          style={{ backgroundColor: "#1b7ced" }}
-          onClick={(e) => setColor(e.target.style.backgroundColor)}
-        />
-        <div
-          className="circle"
-          style={{ backgroundColor: "#ff0000" }}
-          onClick={(e) => setColor(e.target.style.backgroundColor)}
-        />
+        {Object.entries(colorMap).map(([key, value]) => (
+          <div
+            key={key}
+            className="circle"
+            style={{ backgroundColor: value }}
+            onClick={() => handleStrokeColor(value)}
+          />
+        ))}
       </div>
       <div className="btn-group">
         <button className="clear" onClick={resetCanvas}>
