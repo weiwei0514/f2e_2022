@@ -5,6 +5,7 @@ import { useWindowDimensions } from "../useHooks"
 const Signature = () => {
   const [isPainting, setIsPainting] = useState(false)
   const [signatureImg, setSignatureImg] = useState("")
+  const [color, setColor] = useState("#000")
   const wrapperRef = useRef(null)
   const canvasRef = useRef(null)
   const ctxRef = useRef(null)
@@ -81,8 +82,9 @@ const Signature = () => {
     const ctx = canvas.getContext("2d")
     ctx.lineWidth = 2
     ctx.lineCap = "round"
+    ctx.strokeStyle = color
     ctxRef.current = ctx
-  }, [windowWidth])
+  }, [windowWidth,color])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -113,6 +115,11 @@ const Signature = () => {
   return (
     <SignatureWrapper ref={wrapperRef}>
       <canvas ref={canvasRef} />
+      <div className="color-group">
+        <div className="circle" style={{backgroundColor:"#000"}} onClick={(e)=>setColor(e.target.style.backgroundColor)}/>
+        <div className="circle" style={{backgroundColor:"#1b7ced"}} onClick={(e)=>setColor(e.target.style.backgroundColor)}/>
+        <div className="circle" style={{backgroundColor:"#ff0000"}} onClick={(e)=>setColor(e.target.style.backgroundColor)}/>
+      </div>
       <div className="btn-group">
         <button className="clear" onClick={resetCanvas}>
           Clear
@@ -131,6 +138,29 @@ const SignatureWrapper = styled.div`
     border: 1px solid #000;
   }
   .btn-group {
+  }
+  .color-group{
+    padding:10px;
+    display:flex;
+    .circle{
+      width:30px;
+      height:30px;
+      border-radius:50%;
+      margin-right:10px;
+      cursor:pointer;
+      &:hover{
+        opacity:.7;
+      }
+    }
+    .black{
+      background-color:#000;
+    }
+    .blue{
+      background-color:#1b7ced;
+    }
+    .red{
+      background-color:#ff0000;
+    }
   }
 `
 export default Signature
