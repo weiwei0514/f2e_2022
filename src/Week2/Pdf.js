@@ -7,8 +7,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 const Pdf = () => {
   const [message, setMessage] = useState("")
   const canvasRef = useRef(null)
-  const [canvas, setCanvas] = useState(null)
-  const [ctx, setCtx] = useState(null)
   const UploadPdfHandler = (e) => {
     // 透過 input 所選取的檔案
     const file = e.target.files[0]
@@ -33,9 +31,9 @@ const Pdf = () => {
             pdf.getPage(pageNumber).then((page) => {
               const scale = 1.5
               const viewport = page.getViewport({ scale: scale })
-
-              canvas.height = viewport.height
-              canvas.width = viewport.width
+              const ctx = canvasRef.current.getContext('2d')
+              canvasRef.current.height = viewport.height
+              canvasRef.current.width = viewport.width
               const renderContext = {
                 canvasContext: ctx,
                 viewport: viewport,
@@ -53,11 +51,7 @@ const Pdf = () => {
       setMessage("請上傳pdf檔案")
     }
   }
-  useEffect(() => {
-    const c = canvasRef.current
-    setCanvas(c)
-    if (c) setCtx(c.getContext("2d"))
-  }, [canvasRef])
+
 
   return (
     <PdfWrapper>
