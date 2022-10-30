@@ -1,14 +1,20 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 // components
 import Signature from "./Signature"
 import Pdf from "./Pdf"
 const Week2 = () => {
+  const [signatureImg, setSignatureImg] = useState(null)
 
   return (
     <Week2Wrapper>
-      <Signature/>
-      <Pdf/>
+      <Signature
+        signatureImg={signatureImg}
+        setSignatureImg={setSignatureImg}
+      />
+      <Pdf
+        signatureImg={signatureImg}
+      />
     </Week2Wrapper>
   )
 }

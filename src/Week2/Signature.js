@@ -8,9 +8,9 @@ const colorMap = {
   red: '#ff0000'
 }
 
-const Signature = () => {
+const Signature = (props) => {
+  const { signatureImg, setSignatureImg } = props;
   const [isPainting, setIsPainting] = useState(false)
-  const [signatureImg, setSignatureImg] = useState("")
   const wrapperRef = useRef(null)
   const canvasRef = useRef(null)
   const ctxRef = useRef(null)
