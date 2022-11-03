@@ -193,6 +193,9 @@ const Ball = styled.div`
     }
     .secondary {
       margin-top: 60px;
+      ${media.mobile`
+      margin-top: 40px;
+      `}
       p {
         font-size: 36px;
         font-weight: bold;
