@@ -4,6 +4,8 @@ import ground from "../images/ground.png"
 import ball from "../images/ball.png"
 import arrowDown from "../images/arrow_down.png"
 import Particles from "react-particles"
+import media from "../../lib/mediaQuery"
+
 const Home = () => {
   const particlesProps = {
     particles: {
@@ -119,7 +121,6 @@ const Home = () => {
     <HomeWrapper>
       <Particles options={particlesProps} />
       <Ball>
-        <img className="earth" alt="earth" src={ball} />
         <div className="title">
           <div className="primary">
             <p className="lower">The F2E 5th</p>
@@ -149,16 +150,16 @@ const HomeWrapper = styled.div`
 `
 const Ball = styled.div`
   position: relative;
-  width: 80%;
+  width: 90%;
   height: 100%;
+  max-height: 747px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  .earth {
-    width: 100%;
-    max-width: 740px;
-  }
+  background: url(${ball}) no-repeat;
+  background-position: center;
+  background-size: contain;
   .title {
     position: absolute;
     width: 100%;
@@ -172,6 +173,12 @@ const Ball = styled.div`
       align-items: center;
       font-family: "GenosBold";
       font-size: 120px;
+      ${media.tablet`
+        font-size: 100px;
+      `}
+      ${media.mobile`
+        font-size: 60px;
+      `}
       p {
         position: absolute;
         &.upper {
