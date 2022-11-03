@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import ground from "../images/ground.png"
 import ball from "../images/ball.png"
+import arrowDown from "../images/arrow_down.png"
 import Particles from "react-particles"
 const Home = () => {
   const particlesProps = {
@@ -129,6 +130,10 @@ const Home = () => {
           </div>
         </div>
       </Ball>
+      <ScrollDown>
+        <img alt="arrow" src={arrowDown} />
+        <p>scroll down</p>
+      </ScrollDown>
     </HomeWrapper>
   )
 }
@@ -137,6 +142,10 @@ const HomeWrapper = styled.div`
   height: 100vh;
   background: url(${ground}) no-repeat;
   background-position: center bottom;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 const Ball = styled.div`
   position: relative;
@@ -153,7 +162,6 @@ const Ball = styled.div`
   .title {
     position: absolute;
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -184,6 +192,35 @@ const Ball = styled.div`
         color: #fff;
       }
     }
+  }
+`
+
+const ScrollDown = styled.div`
+  position: absolute;
+  bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img {
+    margin-bottom: 10px;
+    animation: float 2s ease-in-out infinite;
+    @keyframes float {
+      from {
+        transform: translateY(0%);
+      }
+      50% {
+        transform: translateY(-50%);
+      }
+      to {
+        transform: translateY(0%);
+      }
+    }
+  }
+  p {
+    font-family: "GenosBold";
+    font-size: 30px;
+    color: #00ffa2;
   }
 `
 export default Home
