@@ -68,6 +68,7 @@ const SponsorWrapper = styled.div`
     padding: 100px 0 600px;
   `}
   .copyright {
+    width:100%;
     position: absolute;
     bottom: 200px;
     text-align: center;

@@ -86,7 +86,7 @@ const Ball = styled.div`
     background-size: contain;
   }
   .title {
-    position: absolute;
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -105,14 +105,17 @@ const Ball = styled.div`
         font-size: 60px;
       `}
       p {
-        position: absolute;
         &.upper {
           color: #fff;
+          position: absolute;
         }
         &.lower {
           margin: 10px 0 0 10px;
           color: transparent;
           -webkit-text-stroke: 1px #00ffa2;
+          ${media.mobile`
+          margin: 5px 0 0 5px;
+          `}
         }
       }
     }
