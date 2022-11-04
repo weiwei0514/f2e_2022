@@ -9,7 +9,7 @@ import sp5 from "../../images/footer_logo_miro.png"
 import sp6 from "../../images/footer_logo_dotted.png"
 import fbg from "../../images/footer_ball.png"
 import arrowUp from "../../images/arrow_up.png"
-
+import media from "lib/mediaQuery"
 const Sponsor = () => {
   const sponsorList = [
     {
@@ -50,21 +50,34 @@ const SponsorWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 1400px;
+  box-sizing: border-box;
   max-width: 1500px;
   margin: 0 auto;
-  padding: 100px 0 200px;
+  padding: 100px 0 700px;
   background-image: url(${fbg});
-  background-position: center 80vh;
+  background-position-x: center;
+  background-position-y: 80vh;
   background-size: contain;
   background-repeat: no-repeat;
   position: relative;
+  ${media.tablet`
+    background-position-y:  bottom;
+  `}
+  ${media.mobile`
+    background-position-y:  bottom;
+    padding: 100px 0 600px;
+  `}
   .copyright {
-    justify-self: end;
+    position: absolute;
+    bottom: 200px;
     text-align: center;
     color: #fff;
     font-size: 24px;
     font-family: Glory;
+    ${media.mobile`
+    font-size: 20px;
+      bottom:100px;
+  `}
   }
 `
 const ScrollUp = styled.div`
@@ -96,6 +109,5 @@ const ScrollUp = styled.div`
     color: #00ffa2;
   }
 `
-
 
 export default Sponsor

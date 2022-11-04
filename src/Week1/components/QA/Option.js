@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import faqActiveIcon from "Week1/images/faq_title_icon.png"
+import media from "lib/mediaQuery"
 
 const Option = ({ option, title, optionsHandler, num }) => {
   return (
@@ -26,5 +27,11 @@ const OptionWrapper = styled.div`
     font-weight: bold;
     color: #31cf84;
   }
+  ${media.tablet`
+    width:50%;
+  `}
+  ${media.mobile`
+    width:50%;
+  `}
 `
 export default Option

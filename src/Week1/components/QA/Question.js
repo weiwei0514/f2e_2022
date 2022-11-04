@@ -18,7 +18,7 @@ const Question = ({ qa, isFirst, isLast }) => {
       onClick={openHandler}
     >
       <div className="question">
-        <p>Q：{qa.q}</p>
+        <p className="q">Q：{qa.q}</p>
         <p className={`btn ${isOpen ? "active" : ""}`}>＋</p>
       </div>
       {isOpen && <p className="answer">A：{qa.a}</p>}
@@ -43,11 +43,13 @@ const QuestionWrapper = styled.div`
     font-size: 18px;
     font-weight: bold;
     line-height: 28px;
-
+    .q{
+      margin-right:20px;
+    }
     .btn {
       font-size: 25px;
       font-weight: normal;
-      transition: transform 0.5s;
+      transition: transform 0.3s;
       &.active {
         transform: rotate(135deg);
       }

@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import bgNoise from "./images/bg-noise.jpg"
-
+import media from "lib/mediaQuery"
 //components
 import Home from "./components/Home"
 import Sponsor from "./components/Sponsor"
@@ -23,6 +23,9 @@ const Shadow = styled.div`
   background: #000;
   bottom: -200px;
   box-shadow: 0 -100px 150px #000;
+  ${media.mobile`
+    opacity:0 ;
+  `}
 `
 
 const Week1Wrapper = styled.div`

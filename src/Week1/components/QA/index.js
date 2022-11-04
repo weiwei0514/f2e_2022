@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import bg from "Week1/images/faq_bg.png"
 import { QAList } from "./doc"
+import media from "lib/mediaQuery"
 //component
 import Option from "./Option"
 import Question from "./Question"
@@ -30,7 +31,7 @@ const QA = () => {
               key={k}
               qa={v}
               isFirst={k === 0}
-              isLast={k === Object.values(QAList)[option]["qa"].length-1}
+              isLast={k === Object.values(QAList)[option]["qa"].length - 1}
             />
           ))}
         </div>
@@ -50,8 +51,27 @@ const QAContainer = styled.div`
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
-
+  ${media.tablet`
+    flex-direction: column;
+  `}
+  ${media.mobile`
+    flex-direction: column;
+  `}
   .options {
+    display: flex;
+    flex-direction: column;
+    ${media.tablet`
+    width:100%;
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content:space-around;
+  `}
+  ${media.mobile`
+    width:100%;
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content:space-around;
+  `}
     p {
       display: flex;
       align-items: center;
@@ -69,6 +89,12 @@ const QAContainer = styled.div`
   }
   .qa {
     width: 75%;
+    ${media.tablet`
+      width: 100%;
+    `}
+    ${media.mobile`
+      width: 100%;
+    `}
   }
 `
 export default QA

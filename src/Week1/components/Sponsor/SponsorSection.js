@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-
+import media from "lib/mediaQuery"
 const SponsorSection = (props) => {
   const { title, imgs } = props
 
@@ -37,12 +37,26 @@ const SectionWrapper = styled.section`
     display: flex;
     justify-content: space-around;
     width: 100%;
+    ${media.tablet`
+      flex-direction:column;
+      align-items:center;
+    `}
+    ${media.mobile`
+      flex-direction:column;
+      align-items:center;
+    `}
   }
   .img {
     opacity: 0.5;
     &:hover {
       opacity: 1;
     }
+    ${media.tablet`
+      margin-bottom:50px;
+    `}
+    ${media.mobile`
+      margin-bottom:50px;
+    `}
   }
 `
 
