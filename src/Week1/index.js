@@ -5,11 +5,12 @@ import bgNoise from "./images/bg-noise.jpg"
 //components
 import Home from "./components/Home"
 import Sponsor from "./components/Sponsor"
-
+import QA from "./components/QA"
 const Week1 = () => {
   return (
     <Week1Wrapper>
       <Home />
+      <QA />
       <Sponsor />
       <Shadow />
     </Week1Wrapper>

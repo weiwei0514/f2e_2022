@@ -1,12 +1,12 @@
-import React, { useCallback, useRef, useEffect } from 'react'
-import { loadFull } from 'tsparticles'
-import styled from 'styled-components'
-import ground from '../../images/ground.png'
-import ball from '../../images/ball.png'
-import arrowDown from '../../images/arrow_down.png'
-import Particles from 'react-particles'
-import media from 'lib/mediaQuery'
-import { particlesProps } from './doc'
+import React, { useCallback, useRef } from "react"
+import { loadFull } from "tsparticles"
+import styled from "styled-components"
+import ground from "../../images/ground.png"
+import ball from "../../images/ball.png"
+import arrowDown from "../../images/arrow_down.png"
+import Particles from "react-particles"
+import media from "lib/mediaQuery"
+import { particlesProps } from "./doc"
 
 const Home = () => {
   const homeRef = useRef(null)
@@ -18,7 +18,7 @@ const Home = () => {
   const particlesLoaded = useCallback((container) => {
     console.log(container)
   }, [])
-  
+
   return (
     <HomeWrapper ref={homeRef}>
       <Particles
@@ -47,7 +47,7 @@ const Home = () => {
 }
 
 const HomeWrapper = styled.div`
-  position:relative;
+  position: relative;
   width: 100%;
   height: 100vh;
   background: url(${ground}) no-repeat;
@@ -57,6 +57,7 @@ const HomeWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   ${media.tablet`
     background-size: initial;
     background-position: center 80vh;
@@ -75,9 +76,15 @@ const Ball = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url(${ball}) no-repeat;
-  background-position: center;
-  background-size: contain;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url(${ball}) no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
   .title {
     position: absolute;
     width: 100%;
@@ -89,7 +96,7 @@ const Ball = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'GenosBold';
+      font-family: "GenosBold";
       font-size: 120px;
       ${media.tablet`
         font-size: 100px;
@@ -146,7 +153,7 @@ const ScrollDown = styled.div`
     }
   }
   p {
-    font-family: 'GenosBold';
+    font-family: "GenosBold";
     font-size: 30px;
     color: #00ffa2;
   }

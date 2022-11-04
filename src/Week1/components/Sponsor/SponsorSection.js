@@ -8,8 +8,8 @@ const SponsorSection = (props) => {
     <SectionWrapper>
       <h6>{title}</h6>
       <div className="imgs">
-        {imgs.map((img) => (
-          <div className="img">
+        {imgs.map((img,k) => (
+          <div key={k} className="img">
             <img alt="sponsor" src={img} />
           </div>
         ))}
