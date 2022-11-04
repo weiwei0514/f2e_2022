@@ -1,20 +1,20 @@
-import { createGlobalStyle } from 'styled-components'
-import Genos from './fonts/Genos-Medium.ttf'
-import GenosBold from './fonts/Genos-Bold.ttf'
-
+import { createGlobalStyle } from "styled-components"
+import Genos from "./fonts/Genos-Medium.ttf"
+import GenosBold from "./fonts/Genos-Bold.ttf"
+import Glory from "./fonts/Glory-Medium.ttf"
 const GlobalStyle = createGlobalStyle`
   body {
     width:100%;
     margin: 0;
     padding: 0;
-    font-family: Open-Sans, Helvetica, Sans-Serif, Genos,GenosBold;
+    font-family: Open-Sans, Helvetica, Sans-Serif, Genos, GenosBold, Glory;
     box-sizing:border-box;
-  }
 
-  /* http://meyerweb.com/eric/tools/css/reset/
-    v2.0 | 20110126
-    License: none (public domain)
-  */
+  }
+  #root{
+    overflow:hidden;
+
+  }
 
   * {
     box-sizing: border-box;
@@ -72,6 +72,11 @@ const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: 'GenosBold';
     src: url(${GenosBold});
+  }
+
+  @font-face {
+    font-family: 'Glory';
+    src: url(${Glory});
   }
 `
 

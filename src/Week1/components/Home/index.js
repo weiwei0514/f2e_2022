@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useRef, useEffect } from 'react'
 import { loadFull } from 'tsparticles'
 import styled from 'styled-components'
 import ground from '../../images/ground.png'
@@ -9,6 +9,7 @@ import media from 'lib/mediaQuery'
 import { particlesProps } from './doc'
 
 const Home = () => {
+  const homeRef = useRef(null)
   const particlesInit = useCallback(async (engine) => {
     console.log(engine)
     await loadFull(engine)
@@ -17,9 +18,9 @@ const Home = () => {
   const particlesLoaded = useCallback((container) => {
     console.log(container)
   }, [])
-
+  
   return (
-    <HomeWrapper>
+    <HomeWrapper ref={homeRef}>
       <Particles
         id="tsparticles"
         init={particlesInit}
@@ -46,6 +47,7 @@ const Home = () => {
 }
 
 const HomeWrapper = styled.div`
+  position:relative;
   width: 100%;
   height: 100vh;
   background: url(${ground}) no-repeat;

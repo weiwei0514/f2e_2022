@@ -1,23 +1,23 @@
-import React, { useCallback } from 'react'
-import styled from 'styled-components'
-import SponsorSection from './SponsorSection'
-import sp1 from '../../images/footer_logo_block.png'
-import sp2 from '../../images/footer_logo_singapore.png'
-import sp3 from '../../images/footer_logo_jira.png'
-import sp4 from '../../images/footer_logo_kdan.png'
-import sp5 from '../../images/footer_logo_miro.png'
-import sp6 from '../../images/footer_logo_dotted.png'
-import fbg from '../../images/footer_ball.png'
-import arrowUp from '../../images/arrow_up.png'
+import React, { useCallback } from "react"
+import styled from "styled-components"
+import SponsorSection from "./SponsorSection"
+import sp1 from "../../images/footer_logo_block.png"
+import sp2 from "../../images/footer_logo_singapore.png"
+import sp3 from "../../images/footer_logo_jira.png"
+import sp4 from "../../images/footer_logo_kdan.png"
+import sp5 from "../../images/footer_logo_miro.png"
+import sp6 from "../../images/footer_logo_dotted.png"
+import fbg from "../../images/footer_ball.png"
+import arrowUp from "../../images/arrow_up.png"
 
 const Sponsor = () => {
   const sponsorList = [
     {
-      title: '鑽石級贊助商',
+      title: "鑽石級贊助商",
       imgs: [sp1, sp2, sp3],
     },
     {
-      title: '工同推廣',
+      title: "工同推廣",
       imgs: [sp4, sp5, sp6],
     },
   ]
@@ -25,7 +25,7 @@ const Sponsor = () => {
   const toTop = useCallback(() => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth',
+      behavior: "smooth",
     })
   }, [])
 
@@ -50,10 +50,12 @@ const SponsorWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 100vh;
-  padding: 150px 0;
+  height: 1400px;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 100px 0 200px;
   background-image: url(${fbg});
-  background-position: center 60vh;
+  background-position: center 80vh;
   background-size: contain;
   background-repeat: no-repeat;
   position: relative;
@@ -62,11 +64,12 @@ const SponsorWrapper = styled.div`
     text-align: center;
     color: #fff;
     font-size: 24px;
+    font-family: Glory;
   }
 `
 const ScrollUp = styled.div`
   position: absolute;
-  bottom: 250px;
+  bottom: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -88,10 +91,11 @@ const ScrollUp = styled.div`
     }
   }
   p {
-    font-family: 'GenosBold';
+    font-family: "GenosBold";
     font-size: 30px;
     color: #00ffa2;
   }
 `
+
 
 export default Sponsor

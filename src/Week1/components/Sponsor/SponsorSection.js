@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from "react"
+import styled from "styled-components"
 
 const SponsorSection = (props) => {
   const { title, imgs } = props
@@ -37,6 +37,12 @@ const SectionWrapper = styled.section`
     display: flex;
     justify-content: space-around;
     width: 100%;
+  }
+  .img {
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+    }
   }
 `
 
