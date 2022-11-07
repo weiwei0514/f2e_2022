@@ -6,10 +6,12 @@ import media from "lib/mediaQuery"
 import Home from "./components/Home"
 import Sponsor from "./components/Sponsor"
 import QA from "./components/QA"
+import Steps from "./components/Steps"
 const Week1 = () => {
   return (
     <Week1Wrapper>
       <Home />
+      <Steps />
       <QA />
       <Sponsor />
       <Shadow />
