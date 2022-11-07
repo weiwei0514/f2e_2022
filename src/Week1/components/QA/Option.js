@@ -22,6 +22,10 @@ const OptionWrapper = styled.div`
   cursor: pointer;
   img {
     margin-right: 10px;
+    ${media.mobile`
+    margin-right: 5px;
+    
+    `}
   }
   &.active {
     font-weight: bold;
@@ -32,6 +36,7 @@ const OptionWrapper = styled.div`
   `}
   ${media.mobile`
     width:50%;
+    font-size:16px;
   `}
 `
 export default Option
