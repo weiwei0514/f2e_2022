@@ -1,6 +1,18 @@
-import React from "react"
-import styled from "styled-components"
-import media from "lib/mediaQuery"
+import React from 'react'
+import styled from 'styled-components'
+import media from 'lib/mediaQuery'
+
+/**
+ * 贊助商標題 + 圖片
+ *
+ * @param {{
+ * title: string,
+ * imgs: Array
+ * }} props -
+ * - title 區塊標題
+ * - imgs 圖片群組
+ * @returns {JSX.Element} 贊助商標題 + 圖片
+ */
 const SponsorSection = (props) => {
   const { title, imgs } = props
 
@@ -8,7 +20,7 @@ const SponsorSection = (props) => {
     <SectionWrapper>
       <h6>{title}</h6>
       <div className="imgs">
-        {imgs.map((img,k) => (
+        {imgs.map((img, k) => (
           <div key={k} className="img">
             <img alt="sponsor" src={img} />
           </div>

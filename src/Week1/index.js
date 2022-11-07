@@ -1,15 +1,18 @@
-import React from "react"
-import styled from "styled-components"
-import bgNoise from "./images/bg-noise.jpg"
-import media from "lib/mediaQuery"
+import React from 'react'
+import styled from 'styled-components'
+import bgNoise from './images/bg-noise.jpg'
+import media from 'lib/mediaQuery'
 //components
-import Home from "./components/Home"
-import Sponsor from "./components/Sponsor"
-import QA from "./components/QA"
+import Home from './components/Home'
+import Sponsor from './components/Sponsor'
+import SignUp from './components/Race'
+import QA from './components/QA'
+
 const Week1 = () => {
   return (
     <Week1Wrapper>
       <Home />
+      <SignUp />
       <QA />
       <Sponsor />
       <Shadow />

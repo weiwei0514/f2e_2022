@@ -1,31 +1,21 @@
-import React, { useCallback } from "react"
-import styled from "styled-components"
-import SponsorSection from "./SponsorSection"
-import sp1 from "../../images/footer_logo_block.png"
-import sp2 from "../../images/footer_logo_singapore.png"
-import sp3 from "../../images/footer_logo_jira.png"
-import sp4 from "../../images/footer_logo_kdan.png"
-import sp5 from "../../images/footer_logo_miro.png"
-import sp6 from "../../images/footer_logo_dotted.png"
-import fbg from "../../images/footer_ball.png"
-import arrowUp from "../../images/arrow_up.png"
-import media from "lib/mediaQuery"
-const Sponsor = () => {
-  const sponsorList = [
-    {
-      title: "鑽石級贊助商",
-      imgs: [sp1, sp2, sp3],
-    },
-    {
-      title: "工同推廣",
-      imgs: [sp4, sp5, sp6],
-    },
-  ]
+import React, { useCallback } from 'react'
+import styled from 'styled-components'
+import SponsorSection from './SponsorSection'
+import fbg from '../../images/footer_ball_small.png'
+import arrowUp from '../../images/arrow_up.png'
+import { sponsorList } from './doc'
+import media from 'lib/mediaQuery'
 
+/**
+ * 贊助商區塊
+ *
+ * @returns {JSX.Element} 贊助商區塊
+ */
+const Sponsor = () => {
   const toTop = useCallback(() => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: 'smooth',
     })
   }, [])
 
@@ -56,7 +46,7 @@ const SponsorWrapper = styled.div`
   padding: 100px 0 700px;
   background-image: url(${fbg});
   background-position-x: center;
-  background-position-y: 80vh;
+  background-position-y: bottom;
   background-size: contain;
   background-repeat: no-repeat;
   position: relative;
@@ -68,7 +58,7 @@ const SponsorWrapper = styled.div`
     padding: 100px 0 600px;
   `}
   .copyright {
-    width:100%;
+    width: 100%;
     position: absolute;
     bottom: 200px;
     text-align: center;
@@ -105,7 +95,7 @@ const ScrollUp = styled.div`
     }
   }
   p {
-    font-family: "GenosBold";
+    font-family: 'GenosBold';
     font-size: 30px;
     color: #00ffa2;
   }
