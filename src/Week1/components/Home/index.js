@@ -1,14 +1,23 @@
-import React, { useCallback, useRef } from "react"
-import { loadFull } from "tsparticles"
-import styled from "styled-components"
-import ground from "../../images/ground.png"
-import ball from "../../images/ball.png"
-import arrowDown from "../../images/arrow_down.png"
-import Particles from "react-particles"
-import media from "lib/mediaQuery"
-import { particlesProps } from "./doc"
+import React, { useCallback, useRef } from 'react'
+import { useWindowDimensions } from 'useHooks'
+import { loadFull } from 'tsparticles'
+import styled from 'styled-components'
+import ground from '../../images/ground.png'
+import ball from '../../images/ball.png'
+import arrowDown from '../../images/arrow_down.png'
+import Particles from 'react-particles'
+import media from 'lib/mediaQuery'
+import { particlesProps } from './doc'
+import gr_light from '../../images/gr_light.png'
+import {
+  MouseParallaxContainer,
+  MouseParallaxChild,
+} from 'react-parallax-mouse'
+import { PC_BREAKPOINT_WIDTH } from 'config/breakpoint'
 
 const Home = () => {
+  const windowWidth = useWindowDimensions().width
+  const isPC = windowWidth >= PC_BREAKPOINT_WIDTH
   const homeRef = useRef(null)
   const particlesInit = useCallback(async (engine) => {
     console.log(engine)
@@ -27,6 +36,34 @@ const Home = () => {
         loaded={particlesLoaded}
         options={particlesProps}
       />
+      {isPC && (
+        <div className="light">
+          <MouseParallaxContainer
+            containerStyle={{ overflow: 'auto', height: '100%', width: '100%' }}
+            globalFactorX={0.1}
+            globalFactorY={0.1}
+          >
+            <MouseParallaxChild
+              style={{ position: 'absolute', top: '0', right: '0' }}
+              factorX={-0.3}
+              factorY={-0.5}
+            >
+              <img src={gr_light} alt="" />
+            </MouseParallaxChild>
+            <MouseParallaxChild
+              style={{
+                position: 'absolute',
+                left: '0',
+                bottom: '0',
+              }}
+              factorX={0.3}
+              factorY={0.5}
+            >
+              <img className="left-light" src={gr_light} alt="" />
+            </MouseParallaxChild>
+          </MouseParallaxContainer>
+        </div>
+      )}
       <Ball>
         <div className="title">
           <div className="primary">
@@ -57,7 +94,16 @@ const HomeWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  .light {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 100;
+    .left-light {
+      width: 350px;
+      height: 350px;
+    }
+  }
   ${media.tablet`
     background-size: initial;
     background-position: center 80vh;
@@ -75,8 +121,9 @@ const Ball = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     width: 100%;
     height: 100%;
@@ -95,7 +142,7 @@ const Ball = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: "GenosBold";
+      font-family: 'GenosBold';
       font-size: 120px;
       ${media.tablet`
         font-size: 100px;
@@ -155,7 +202,7 @@ const ScrollDown = styled.div`
     }
   }
   p {
-    font-family: "GenosBold";
+    font-family: 'GenosBold';
     font-size: 30px;
     color: #00ffa2;
   }
