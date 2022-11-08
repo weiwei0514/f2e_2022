@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/f2e_2022/static/js/main.31b0febe.js",
+    "main.js": "/f2e_2022/static/js/main.5e2e3eb0.js",
     "static/js/787.8d7cacf3.chunk.js": "/f2e_2022/static/js/787.8d7cacf3.chunk.js",
     "static/media/footer_ball_small.png": "/f2e_2022/static/media/footer_ball_small.ca98371f83bff0340352.png",
     "static/media/ball.png": "/f2e_2022/static/media/ball.f2dabc4d7edc820def35.png",
@@ -13,14 +13,15 @@
     "static/media/bg_event_rope.png": "/f2e_2022/static/media/bg_event_rope.888fa237153513986fc6.png",
     "static/media/p04.png": "/f2e_2022/static/media/p04.7e71d06e0b66bd1df80c.png",
     "static/media/p01.png": "/f2e_2022/static/media/p01.aa715354ad6179bb7caf.png",
+    "static/media/sun_04.png": "/f2e_2022/static/media/sun_04.f352b28e4222514fe50c.png",
     "static/media/bg-noise.jpg": "/f2e_2022/static/media/bg-noise.c02e922c43e5db21fea9.jpg",
     "static/media/step_road_01.svg": "/f2e_2022/static/media/step_road_01.be1d4292d9ee68fc562246c7bce6ecac.svg",
     "static/media/step_road_02.svg": "/f2e_2022/static/media/step_road_02.40cff53d3538bcfe44e955b84ff51678.svg",
     "index.html": "/f2e_2022/index.html",
-    "main.31b0febe.js.map": "/f2e_2022/static/js/main.31b0febe.js.map",
+    "main.5e2e3eb0.js.map": "/f2e_2022/static/js/main.5e2e3eb0.js.map",
     "787.8d7cacf3.chunk.js.map": "/f2e_2022/static/js/787.8d7cacf3.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.31b0febe.js"
+    "static/js/main.5e2e3eb0.js"
   ]
 }
