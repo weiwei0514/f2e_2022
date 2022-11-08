@@ -3,13 +3,17 @@ import styled from 'styled-components'
 import star from '../../images/price_title_icon.png'
 import dialogBg from '../../images/dialog02.png'
 import shape from '../../images/shape.png'
-
+import sun from '../../images/sun_04.png'
+import media from 'lib/mediaQuery'
 const InfoBlock = () => {
   return (
     <InfoBlockWrapper>
       <h5>區區修煉已經無法滿足了嗎？</h5>
-      <h5 className="dialogBg">還有比賽等著你！</h5>
-      <article>
+      <div className="dialogBg">
+        <img src={dialogBg} alt="dialog" />
+        <p>還有比賽等著你！</p>
+      </div>
+      <article className="left">
         <section>
           <h6>評審機制</h6>
           <ul>
@@ -54,39 +58,89 @@ const InfoBlock = () => {
 }
 
 const InfoBlockWrapper = styled.div`
+  position: relative;
   z-index: 1;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: stretch;
+  width: 90%;
   max-width: 1240px;
   margin: 0 auto;
+  padding-top: 200px;
+  /* black curl bg */
+  :before {
+    content: '';
+    background-color: #201f20;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 0 0 100% 100%;
+    height: 100%;
+    width: 3200px;
+    ${media.tablet`
+      border-radius:0;
+    `}
+  }
   h5 {
-    font-size: 45px;
+    font-size: 34px;
     font-weight: bold;
     margin-bottom: 60px;
     width: 48%;
     color: #fff;
     z-index: 1;
+    text-align: center;
     white-space: nowrap;
-    &.dialogBg {
-      position: relative;
-      color: #201f20;
-      font-size: 65px;
-      z-index: 1;
-      :after {
-        content: '';
-        position: absolute;
-        background-image: url(${dialogBg});
-        left: -0.5em;
-        top: -10px;
-        background-size: contain;
-        background-repeat: no-repeat;
-        height: 121px;
-        width: 100%;
-        z-index: -1;
-      }
+    ${media.tablet`
+      width:100%;
+      font-size:45px;
+    `}
+    ${media.mobile`
+      font-size:26px;
+    `}
+  }
+  .dialogBg {
+    position: relative;
+    width: 48%;
+    height: 121px;
+    z-index: 1;
+    img {
+      position: absolute;
+      width: 100%;
+      top: -30px;
+      left: -20px;
     }
+    p {
+      text-align: center;
+      position: relative;
+      font-size: 52px;
+      font-weight: bold;
+      color: #201f20;
+      transform: translate(-10px, -15px);
+    }
+    ${media.tablet`
+      width:100%;
+      margin-bottom:100px;
+
+      img {
+        top:0;
+        left:0;
+      }
+      p {
+        font-size:72px;
+        line-height:115px;
+        transform:translate(0) ;
+      }
+    `}
+    ${media.mobile`
+      margin-bottom:0;
+      p{
+        font-size:36px;
+        line-height:55px;
+
+      }
+    `}
   }
   article {
     z-index: 1;
@@ -94,13 +148,14 @@ const InfoBlockWrapper = styled.div`
     display: flex;
     flex-direction: column;
     section {
-      padding: 50px 80px 80px;
+      padding: 50px 10% 80px;
       background: #201f20;
       border: 1px solid #31cf84;
       border-right-width: 5px;
       border-bottom-width: 5px;
       border-radius: 20px;
       flex: 1;
+      z-index: 1;
       h6 {
         font-size: 40px;
         font-weight: bold;
@@ -135,6 +190,26 @@ const InfoBlockWrapper = styled.div`
         }
       }
     }
+    /* sun */
+    &.left {
+      :before {
+        content: '';
+        position: absolute;
+        background: url(${sun});
+        width: 258px;
+        height: 262px;
+        transform: translate(-50%, 100%);
+        animation: sunRotate 4s linear infinite;
+        ${media.tablet`
+          transform: translate(-50%,-50%);
+          animation: none ;
+        `}
+      }
+    }
+    ${media.tablet`
+      width:100%;
+      margin-bottom:50px;
+    `}
   }
   .signupBtn {
     width: 100%;
@@ -158,18 +233,35 @@ const InfoBlockWrapper = styled.div`
         top: 50%;
         transform: translate(-50%, -50%);
         animation: shapeRotate 4s linear infinite;
-        @keyframes shapeRotate {
-          from {
-            transform: translate(-50%, -50%) rotate(0deg);
-          }
-          50% {
-            transform: translate(-50%, -50%) rotate(180deg);
-          }
-          to {
-            transform: translate(-50%, -50%) rotate(360deg);
-          }
-        }
       }
+    }
+
+    ${media.tablet`
+      margin: 150px 0;
+    `}
+  }
+
+  @keyframes shapeRotate {
+    from {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    50% {
+      transform: translate(-50%, -50%) rotate(180deg);
+    }
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  @keyframes sunRotate {
+    from {
+      transform: translate(-50%, 50%) rotate(0deg);
+    }
+    50% {
+      transform: translate(-50%, 50%) rotate(180deg);
+    }
+    to {
+      transform: translate(-50%, 50%) rotate(360deg);
     }
   }
 `

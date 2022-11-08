@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Share from './Share'
-
+import media from 'lib/mediaQuery'
 import { shareList } from './doc'
 
 import star from '../../images/bg_event_star.png'
@@ -24,10 +24,12 @@ const SharesBlock = () => {
 }
 
 const SharesBlockWrapper = styled.div`
+  width: 90%;
   max-width: 1240px;
   margin: 0 auto;
   position: relative;
   z-index: 1;
+
   h5 {
     color: #201f20;
     font-size: 36px;
@@ -38,6 +40,9 @@ const SharesBlockWrapper = styled.div`
   .shareList {
     display: flex;
     justify-content: space-between;
+    ${media.tablet`
+      flex-direction:column;
+    `}
   }
   .star {
     position: absolute;

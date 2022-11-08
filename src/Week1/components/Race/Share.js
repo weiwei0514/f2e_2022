@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import media from 'lib/mediaQuery'
 const ShareBlock = ({ info }) => {
   const { img, title, desc } = info
 
@@ -28,19 +28,28 @@ const ShareBlock = ({ info }) => {
 
 const ShareWrapper = styled.div`
   position: relative;
-  transform: rotateZ(-3deg);
-  transition: all 0.3s;
-  :nth-child(even) {
-    transform: rotateZ(3deg);
-  }
-  :hover {
-    transform: rotateZ(0deg);
-  }
+  width:23%;
+  height:458px;
+  ${media.pc`
+    transform: rotateZ(-3deg);
+    transition: all 0.3s;
+    :nth-child(even) {
+      transform: rotateZ(3deg);
+    }
+    :hover {
+      transform: rotateZ(0deg);
+    }
+  `}
+  ${media.tablet`
+    width:100%;
+    height:320px;
+    margin-bottom:20px;
+  `}
   .mainBlock {
     display: flex;
     flex-direction: column;
-    height: 450px;
-    width: 270px;
+    height: calc(100% - 8px);
+    width: calc(100% - 10px);
     padding: 20px;
     background-color: #201f20;
     border-radius: 13px;
@@ -80,11 +89,14 @@ const ShareWrapper = styled.div`
         }
       }
     }
+    ${media.tablet`
+      flex-direction:row;
+    `}
   }
   .bg {
     position: absolute;
-    height: 458px;
-    width: 280px;
+    height: 100%;
+    width: 100%;
     border-radius: 13px 26px 13px 26px;
     border: 2px solid #201f20;
     background: #31cf84;
