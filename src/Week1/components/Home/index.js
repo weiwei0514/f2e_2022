@@ -39,12 +39,12 @@ const Home = () => {
       {isPC && (
         <div className="light">
           <MouseParallaxContainer
-            containerStyle={{ overflow: 'auto', height: '100%', width: '100%' }}
+            containerStyle={{ height: '100%', width: '100%' }}
             globalFactorX={0.1}
             globalFactorY={0.1}
           >
             <MouseParallaxChild
-              style={{ position: 'absolute', top: '0', right: '0' }}
+              style={{ position: 'absolute', top: '-150px', right: '-150px' }}
               factorX={-0.3}
               factorY={-0.5}
             >
@@ -53,8 +53,8 @@ const Home = () => {
             <MouseParallaxChild
               style={{
                 position: 'absolute',
-                left: '0',
-                bottom: '0',
+                left: '-100px',
+                bottom: '-100px',
               }}
               factorX={0.3}
               factorY={0.5}
@@ -100,7 +100,7 @@ const HomeWrapper = styled.div`
     position: absolute;
     z-index: 100;
     .left-light {
-      width: 350px;
+      width: 300px;
       height: 350px;
     }
   }
