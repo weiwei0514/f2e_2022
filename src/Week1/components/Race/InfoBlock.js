@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import star from '../../images/price_title_icon.png'
 import dialogBg from '../../images/dialog02.png'
 import shape from '../../images/shape.png'
-import sun from '../../images/sun_04.png'
+import sun1 from '../../images/sun_03.png'
+import sun2 from '../../images/sun_04.png'
 import media from 'lib/mediaQuery'
 const InfoBlock = () => {
   return (
@@ -105,6 +106,25 @@ const InfoBlockWrapper = styled.div`
     width: 48%;
     height: 121px;
     z-index: 2;
+    ${media.tablet`
+      z-index: 0;
+    `}
+    :before {
+      content: '';
+      position: absolute;
+      top: -173px;
+      right: -50px;
+      background: url(${sun1});
+      width: 143px;
+      height: 143px;
+      animation: sunRotate 4s linear infinite;
+      ${media.tablet`
+          transform: translate(-50%,-50%);
+          animation: none;
+          top: 800px;
+          right: -140px;
+        `}
+    }
     img {
       position: absolute;
       width: 100%;
@@ -195,7 +215,7 @@ const InfoBlockWrapper = styled.div`
       :before {
         content: '';
         position: absolute;
-        background: url(${sun});
+        background: url(${sun2});
         width: 258px;
         height: 262px;
         transform: translate(-50%, 100%);

@@ -43,7 +43,6 @@ const ShareWrapper = styled.div`
     flex-wrap:wrap;
     flex-direction: row;
     height:auto;
-    /* max-height:250px; */
     `}
   }
   .category {
@@ -85,6 +84,7 @@ const ShareWrapper = styled.div`
       justify-content: space-around;
       ${media.tablet`
         justify-content: space-between;
+        margin-left: 10px
       `}
       .title {
         color: #00ffa2;
@@ -95,6 +95,10 @@ const ShareWrapper = styled.div`
         }
         .time {
           font-size: 16px;
+          ${media.tablet`
+            margin-top: 10px;
+            font-weight: normal;
+          `}
         }
       }
       .desc {
@@ -103,6 +107,9 @@ const ShareWrapper = styled.div`
           color: #fff;
           font-size: 16px;
           font-weight: bold;
+          ${media.tablet`
+            font-weight: normal;
+          `}
         }
         .job {
           color: #848484;
