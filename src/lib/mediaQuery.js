@@ -1,5 +1,9 @@
 import { css } from 'styled-components'
-import { PC_BREAKPOINT_WIDTH, PAD_BREAKPOINT_WIDTH, MOBILE_BREAKPOINT_WIDTH } from '../config/breakpoint'
+import {
+  PC_BREAKPOINT_WIDTH,
+  PAD_BREAKPOINT_WIDTH,
+  MOBILE_BREAKPOINT_WIDTH,
+} from '../config/breakpoint'
 
 // constants
 const sizes = {
@@ -12,25 +16,24 @@ const sizes = {
 // Iterate through the sizes and create a media template
 const media = Object.keys(sizes).reduce((acc, label) => {
   acc[label] = (...args) => {
-    if (label === "pc") {
+    if (label === 'pc') {
       return css`
         @media (min-width: ${PC_BREAKPOINT_WIDTH}px) {
           ${css(...args)}
         }
-      `.join("");
-    } else if (label === "mobile") {
+      `.join('')
+    } else if (label === 'tablet') {
+      return css`
+        @media (max-width: ${PC_BREAKPOINT_WIDTH - 1}px) {
+          ${css(...args)}
+        }
+      `.join('')
+    } else {
       return css`
         @media (max-width: ${MOBILE_BREAKPOINT_WIDTH}px) {
           ${css(...args)}
         }
-      `.join("");
-    } else {
-      return css`
-        @media (min-width: ${MOBILE_BREAKPOINT_WIDTH}px) and (max-width: ${PC_BREAKPOINT_WIDTH -
-            1}px) {
-          ${css(...args)}
-        }
-      `.join("");
+      `.join('')
     }
   }
   return acc

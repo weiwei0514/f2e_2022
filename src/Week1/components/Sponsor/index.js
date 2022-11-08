@@ -64,7 +64,6 @@ const SponsorWrapper = styled.div`
     background-position-y:  bottom;
   `}
   ${media.mobile`
-    background-position-y:  bottom;
     padding: 100px 0 600px;
   `}
   .copyright {

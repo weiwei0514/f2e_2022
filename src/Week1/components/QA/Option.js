@@ -1,12 +1,12 @@
-import React from "react"
-import styled from "styled-components"
-import faqActiveIcon from "Week1/images/faq_title_icon.png"
-import media from "lib/mediaQuery"
+import React from 'react'
+import styled from 'styled-components'
+import faqActiveIcon from 'Week1/images/faq_title_icon.png'
+import media from 'lib/mediaQuery'
 
 const Option = ({ option, title, optionsHandler, num }) => {
   return (
     <OptionWrapper
-      className={option === num ? "active" : ""}
+      className={option === num ? 'active' : ''}
       onClick={() => optionsHandler(num)}
     >
       {option === num && <img src={faqActiveIcon} alt="icon" />}
@@ -23,8 +23,7 @@ const OptionWrapper = styled.div`
   img {
     margin-right: 10px;
     ${media.mobile`
-    margin-right: 5px;
-    
+      margin-right: 5px;
     `}
   }
   &.active {
@@ -35,7 +34,6 @@ const OptionWrapper = styled.div`
     width:50%;
   `}
   ${media.mobile`
-    width:50%;
     font-size:16px;
   `}
 `
