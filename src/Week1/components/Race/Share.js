@@ -7,19 +7,22 @@ const ShareBlock = ({ info }) => {
   return (
     <ShareWrapper>
       <div className="mainBlock">
-        <div className="img">
-          <img alt="share card img" src={img} />
-        </div>
-        <div className="info">
-          <div className="title">
-            <p className="name">{title.name}</p>
-            <p className="time">{title.time}</p>
+        <div className="img-info">
+          <div className="img">
+            <img alt="share card img" src={img} />
           </div>
-          <div className="desc">
-            <p className="name">{desc.name}</p>
-            <p className="job">{desc.job}</p>
+          <div className="info">
+            <div className="title">
+              <p className="name">{title.name}</p>
+              <p className="time">{title.time}</p>
+            </div>
+            <div className="desc">
+              <p className="name">{desc.name}</p>
+              <p className="job">{desc.job}</p>
+            </div>
           </div>
         </div>
+        <div className="category">免費公開場</div>
       </div>
       <div className="bg"></div>
     </ShareWrapper>
@@ -30,7 +33,36 @@ const ShareWrapper = styled.div`
   position: relative;
   width: 23%;
   height: 458px;
-
+  .img-info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    ${media.tablet`
+    flex-wrap:wrap;
+    flex-direction: row;
+    height:auto;
+    /* max-height:250px; */
+    `}
+  }
+  .category {
+    position: absolute;
+    color: #00ffa2;
+    font-size: 14px;
+    font-weight: bold;
+    background: #201f20;
+    padding: 4px 13px;
+    border-radius: 0 0 10px 10px;
+    left: 50%;
+    transform: translate(-50%, -5px);
+    ${media.tablet`
+      position: relative;
+      padding: 0;
+      margin-top: 15px;
+      background:none ;
+    `}
+  }
   .mainBlock {
     display: flex;
     flex-direction: column;
@@ -78,9 +110,6 @@ const ShareWrapper = styled.div`
         }
       }
     }
-    ${media.tablet`
-      flex-direction:row;
-    `}
   }
 
   .bg {
@@ -105,7 +134,8 @@ const ShareWrapper = styled.div`
   `}
   ${media.tablet`
     width:100%;
-    height:320px;
+    height:auto;
+    padding-bottom:10px;
     margin-bottom:20px;
   `}
   ${media.mobile`

@@ -104,7 +104,7 @@ const InfoBlockWrapper = styled.div`
     position: relative;
     width: 48%;
     height: 121px;
-    z-index: 1;
+    z-index: 2;
     img {
       position: absolute;
       width: 100%;
