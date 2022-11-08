@@ -43,14 +43,18 @@ export function useGetStepsTop() {
   const [top, setTop] = useState(
     getWindowDimensions().height - getStepsPosition()
   )
+  const root = document.getElementById('root')
+
   useEffect(() => {
     function handleWheel() {
       setTop(getWindowDimensions().height - getStepsPosition())
     }
     handleWheel()
-    window.addEventListener('wheel', handleWheel)
-    return () => window.removeEventListener('wheel', handleWheel)
-  }, [])
+    window.addEventListener('scroll',handleWheel)
+    return () => {
+      window.removeEventListener('scroll',handleWheel)
+    }
+  }, [root])
 
   return top
 }
