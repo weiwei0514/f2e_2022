@@ -1,3 +1,4 @@
+import lighten from "../../images/lighten.png"
 const particlesProps = {
   particles: {
     number: {
@@ -11,13 +12,18 @@ const particlesProps = {
       value: '#00ffa2',
     },
     shape: {
-      type: 'circle',
+      type: 'image',
       stroke: {
         width: 0,
         color: '#000000',
       },
       polygon: {
         nb_sides: 5,
+      },
+      image: {
+        src: `${lighten}`,
+        width: 100,
+        height: 100,
       },
     },
     opacity: {
@@ -31,7 +37,7 @@ const particlesProps = {
       },
     },
     size: {
-      value: 3,
+      value: 10,
       random: true,
       anim: {
         enable: false,
