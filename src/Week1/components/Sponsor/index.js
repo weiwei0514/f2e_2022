@@ -55,6 +55,7 @@ const SponsorWrapper = styled.div`
   `}
   ${media.mobile`
     padding: 100px 0 600px;
+    background-size: 200%;
   `}
   .copyright {
     width: 100%;
