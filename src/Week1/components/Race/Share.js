@@ -28,23 +28,9 @@ const ShareBlock = ({ info }) => {
 
 const ShareWrapper = styled.div`
   position: relative;
-  width:23%;
-  height:458px;
-  ${media.pc`
-    transform: rotateZ(-3deg);
-    transition: all 0.3s;
-    :nth-child(even) {
-      transform: rotateZ(3deg);
-    }
-    :hover {
-      transform: rotateZ(0deg);
-    }
-  `}
-  ${media.tablet`
-    width:100%;
-    height:320px;
-    margin-bottom:20px;
-  `}
+  width: 23%;
+  height: 458px;
+
   .mainBlock {
     display: flex;
     flex-direction: column;
@@ -55,16 +41,19 @@ const ShareWrapper = styled.div`
     border-radius: 13px;
     position: relative;
     z-index: 1;
-    .img {
-      img {
-        width: 100%;
-      }
+    img {
+      width: 100%;
+      max-width: 250px;
     }
+
     .info {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      ${media.tablet`
+        justify-content: space-between;
+      `}
       .title {
         color: #00ffa2;
         line-height: 1.2;
@@ -93,6 +82,7 @@ const ShareWrapper = styled.div`
       flex-direction:row;
     `}
   }
+
   .bg {
     position: absolute;
     height: 100%;
@@ -103,6 +93,26 @@ const ShareWrapper = styled.div`
     top: 0px;
     left: 0px;
   }
+  ${media.pc`
+    transform: rotateZ(-3deg);
+    transition: all 0.3s;
+    :nth-child(even) {
+      transform: rotateZ(3deg);
+    }
+    :hover {
+      transform: rotateZ(0deg);
+    }
+  `}
+  ${media.tablet`
+    width:100%;
+    height:320px;
+    margin-bottom:20px;
+  `}
+  ${media.mobile`
+    .img{
+      width:50%;
+    }
+  `}
 `
 
 export default ShareBlock
