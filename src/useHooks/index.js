@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react'
 
 export const useTitle = (title) => {
   useEffect(() => {
@@ -18,6 +18,11 @@ const getWindowDimensions = () => {
   }
 }
 
+const getStepsPosition = () => {
+  const step = document.getElementById('step')
+  return step?.getBoundingClientRect().top
+}
+
 export const useWindowDimensions = () => {
   const [windowDimensions, setWindowDimensions] = useState(
     getWindowDimensions()
@@ -27,9 +32,25 @@ export const useWindowDimensions = () => {
       setWindowDimensions(getWindowDimensions())
     }
 
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   return windowDimensions
+}
+
+export function useGetStepsTop() {
+  const [top, setTop] = useState(
+    getWindowDimensions().height - getStepsPosition()
+  )
+  useEffect(() => {
+    function handleWheel() {
+      setTop(getWindowDimensions().height - getStepsPosition())
+    }
+    handleWheel()
+    window.addEventListener('wheel', handleWheel)
+    return () => window.removeEventListener('wheel', handleWheel)
+  }, [])
+
+  return top
 }

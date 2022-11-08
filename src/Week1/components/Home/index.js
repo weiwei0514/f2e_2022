@@ -63,7 +63,6 @@ const HomeWrapper = styled.div`
     background-position: center 80vh;
   `}
   ${media.mobile`
-    background-size: initial;
     background-position: center 65vh;
   `}
 `

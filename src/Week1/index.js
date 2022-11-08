@@ -7,11 +7,13 @@ import Home from './components/Home'
 import Sponsor from './components/Sponsor'
 import SignUp from './components/Race'
 import QA from './components/QA'
+import Steps from './components/Steps'
 
 const Week1 = () => {
   return (
     <Week1Wrapper>
       <Home />
+      <Steps />
       <SignUp />
       <QA />
       <Sponsor />

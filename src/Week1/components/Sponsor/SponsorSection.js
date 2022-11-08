@@ -53,10 +53,6 @@ const SectionWrapper = styled.section`
       flex-direction:column;
       align-items:center;
     `}
-    ${media.mobile`
-      flex-direction:column;
-      align-items:center;
-    `}
   }
   .img {
     opacity: 0.5;
@@ -64,9 +60,6 @@ const SectionWrapper = styled.section`
       opacity: 1;
     }
     ${media.tablet`
-      margin-bottom:50px;
-    `}
-    ${media.mobile`
       margin-bottom:50px;
     `}
   }

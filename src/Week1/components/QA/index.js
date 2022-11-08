@@ -54,19 +54,11 @@ const QAContainer = styled.div`
   ${media.tablet`
     flex-direction: column;
   `}
-  ${media.mobile`
-    flex-direction: column;
-  `}
+
   .options {
     display: flex;
     flex-direction: column;
     ${media.tablet`
-    width:100%;
-    flex-direction: row;
-    flex-wrap:wrap;
-    justify-content:space-around;
-  `}
-    ${media.mobile`
     width:100%;
     flex-direction: row;
     flex-wrap:wrap;
