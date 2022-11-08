@@ -45,6 +45,9 @@ const SharesBlockWrapper = styled.div`
     `}
   }
   .star {
+    ${media.tablet`
+      display:none;
+    `}
     position: absolute;
     width: 58px;
     height: 58px;
