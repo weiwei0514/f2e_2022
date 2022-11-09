@@ -2,12 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import media from 'lib/mediaQuery'
 import { menuList } from './doc'
-const MenuList = ({ menuOpen, setMenuOpen }) => {
-  const closeMenuListHandler = () => {
-    setMenuOpen(false)
-  }
+const MenuList = ({ menuOpen }) => {
+
   return (
-    <MenuListWrapper>
       <MenuListContent className={`${menuOpen}`}>
         {menuList.map((v, i) => (
           <MenuItem key={i} num={i} isOpen={menuOpen}>
@@ -15,21 +12,15 @@ const MenuList = ({ menuOpen, setMenuOpen }) => {
           </MenuItem>
         ))}
       </MenuListContent>
-      <MenuListBackground onClick={closeMenuListHandler} />
-    </MenuListWrapper>
   )
 }
 
-const MenuListWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-`
 const MenuListContent = styled.div`
   padding: 5% 80px 0 0;
-  position: absolute;
+  position: fixed;
   right: -40%;
   width: 40%;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(26, 26, 26, 0.9);
   backdrop-filter: blur(5px);
   z-index: 11;
@@ -83,9 +74,5 @@ const MenuItem = styled.div`
     }
   }
 `
-const MenuListBackground = styled.div`
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-`
+
 export default MenuList

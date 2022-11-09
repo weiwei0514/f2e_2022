@@ -10,7 +10,7 @@ const Menu = () => {
     setMenuOpen(!menuOpen)
   }
   return (
-    <MenuWrapper>
+    <>
       <MenuBar>
         <div className="btn" onClick={menuHandler}>
           <div className="hamburger">
@@ -25,18 +25,13 @@ const Menu = () => {
         </div>
       </MenuBar>
       <MenuList menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
-    </MenuWrapper>
+      {menuOpen && <MenuListBackground onClick={() => setMenuOpen(false)} />}
+    </>
   )
 }
 
-const MenuWrapper = styled.div`
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  z-index: 10;
-`
 const MenuBar = styled.div`
-  position: absolute;
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,7 +99,7 @@ const MenuBar = styled.div`
     font-family: GenosBold;
     font-size: 24px;
     letter-spacing: 2.4px;
-    margin: 20px 4px 0 0;
+    margin: 20px 0 0 4px;
     &.true {
       display: none;
     }
@@ -139,5 +134,12 @@ const MenuBar = styled.div`
       display:none;
     `}
   }
+`
+const MenuListBackground = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  cursor: pointer;
 `
 export default Menu
