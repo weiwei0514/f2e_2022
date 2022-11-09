@@ -20,7 +20,7 @@ const MenuListContent = styled.div`
   position: fixed;
   right: -40%;
   width: 40%;
-  height: 100vh;
+  height: 100%;
   background-color: rgba(26, 26, 26, 0.9);
   backdrop-filter: blur(5px);
   z-index: 11;
