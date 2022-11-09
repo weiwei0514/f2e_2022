@@ -2,7 +2,7 @@ import lighten from "../../images/lighten.png"
 const particlesProps = {
   particles: {
     number: {
-      value: 50,
+      value: 30,
       density: {
         enable: false,
         value_area: 800,

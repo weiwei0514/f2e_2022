@@ -8,10 +8,11 @@ import Sponsor from './components/Sponsor'
 import SignUp from './components/Race'
 import QA from './components/QA'
 import Steps from './components/Steps'
-
+import Menu from './components/Menu'
 const Week1 = () => {
   return (
     <Week1Wrapper>
+      <Menu />
       <Home />
       <Steps />
       <SignUp />
@@ -40,6 +41,9 @@ const Week1Wrapper = styled.div`
   background-image: url(${bgNoise});
   background-size: 100px;
   animation: noise 0.6s steps(10) infinite;
+  ${media.pc`
+    padding-right:80px;
+  `}
   @keyframes noise {
     0% {
       background-position: 0 0;

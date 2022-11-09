@@ -11,8 +11,8 @@ const SharesBlock = () => {
     <SharesBlockWrapper>
       <h5>各界大神接力分享</h5>
       <div className="shareList">
-        {shareList.map((share) => (
-          <Share info={share} />
+        {shareList.map((share, i) => (
+          <Share key={i} info={share} />
         ))}
       </div>
       <div className="star position1"></div>

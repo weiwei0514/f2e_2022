@@ -98,7 +98,7 @@ const HomeWrapper = styled.div`
     width: 100%;
     height: 100%;
     position: absolute;
-    z-index: 100;
+    z-index: 9;
     .left-light {
       width: 300px;
       height: 350px;
