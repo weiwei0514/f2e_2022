@@ -7,7 +7,7 @@ import ball from '../../images/ball.png'
 import arrowDown from '../../images/arrow_down.png'
 import Particles from 'react-particles'
 import media from 'lib/mediaQuery'
-import { particlesProps } from './doc'
+import { particlesProps, particlesStyle } from './doc'
 import gr_light from '../../images/gr_light.png'
 import {
   MouseParallaxContainer,
@@ -20,12 +20,7 @@ const Home = () => {
   const isPC = windowWidth >= PC_BREAKPOINT_WIDTH
   const homeRef = useRef(null)
   const particlesInit = useCallback(async (engine) => {
-    console.log(engine)
     await loadFull(engine)
-  }, [])
-
-  const particlesLoaded = useCallback((container) => {
-    console.log(container)
   }, [])
 
   return (
@@ -33,7 +28,6 @@ const Home = () => {
       <Particles
         id="tsparticles"
         init={particlesInit}
-        loaded={particlesLoaded}
         options={particlesProps}
       />
       {isPC && (

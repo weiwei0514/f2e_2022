@@ -9,11 +9,13 @@ import SignUp from './components/Race'
 import QA from './components/QA'
 import Steps from './components/Steps'
 import Menu from './components/Menu'
+import Intro from './components/Intro'
 const Week1 = () => {
   return (
     <Week1Wrapper>
       <Menu />
       <Home />
+      <Intro />
       <Steps />
       <SignUp />
       <QA />

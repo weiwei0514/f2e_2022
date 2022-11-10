@@ -106,9 +106,6 @@ const InfoBlockWrapper = styled.div`
     width: 48%;
     height: 121px;
     z-index: 2;
-    ${media.tablet`
-      z-index: 0;
-    `}
     :before {
       content: '';
       position: absolute;
@@ -287,13 +284,13 @@ const InfoBlockWrapper = styled.div`
 
   @keyframes sunRotateMobile {
     from {
-      transform: translate(-50%,-50%) rotate(0deg);
+      transform: translate(-50%, -50%) rotate(0deg);
     }
     50% {
-      transform: translate(-50%,-50%) rotate(180deg);
+      transform: translate(-50%, -50%) rotate(180deg);
     }
     to {
-      transform: translate(-50%,-50%) rotate(360deg);
+      transform: translate(-50%, -50%) rotate(360deg);
     }
   }
 `

@@ -1,4 +1,5 @@
-import lighten from "../../images/lighten.png"
+import lighten from '../../images/lighten.png'
+
 const particlesProps = {
   particles: {
     number: {
