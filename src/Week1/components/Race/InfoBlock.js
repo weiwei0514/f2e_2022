@@ -120,7 +120,7 @@ const InfoBlockWrapper = styled.div`
       animation: sunRotate 4s linear infinite;
       ${media.tablet`
           transform: translate(-50%,-50%);
-          animation: none;
+          animation: sunRotateMobile 4s linear infinite;
           top: 800px;
           right: -140px;
         `}
@@ -222,7 +222,7 @@ const InfoBlockWrapper = styled.div`
         animation: sunRotate 4s linear infinite;
         ${media.tablet`
           transform: translate(-50%,-50%);
-          animation: none ;
+          animation: sunRotateMobile 4s linear infinite; 
         `}
       }
     }
@@ -282,6 +282,18 @@ const InfoBlockWrapper = styled.div`
     }
     to {
       transform: translate(-50%, 50%) rotate(360deg);
+    }
+  }
+
+  @keyframes sunRotateMobile {
+    from {
+      transform: translate(-50%,-50%) rotate(0deg);
+    }
+    50% {
+      transform: translate(-50%,-50%) rotate(180deg);
+    }
+    to {
+      transform: translate(-50%,-50%) rotate(360deg);
     }
   }
 `

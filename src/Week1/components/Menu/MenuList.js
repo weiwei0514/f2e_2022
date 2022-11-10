@@ -28,13 +28,12 @@ const MenuListContent = styled.div`
   &.true {
     right: 0;
     ${media.tablet`
-      top:0
+    right: 0;
     `}
   }
   ${media.tablet`
     width:100%;
-    top:-100%;
-    right:0;
+    right:-100%;
     padding: 20% 0 0;
   `}
   ${media.mobile`
