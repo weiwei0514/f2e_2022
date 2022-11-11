@@ -7,7 +7,7 @@ import ball from '../../images/ball.png'
 import arrowDown from '../../images/arrow_down.png'
 import Particles from 'react-particles'
 import media from 'lib/mediaQuery'
-import { particlesProps, particlesStyle } from './doc'
+import { particlesProps } from './doc'
 import gr_light from '../../images/gr_light.png'
 import {
   MouseParallaxContainer,

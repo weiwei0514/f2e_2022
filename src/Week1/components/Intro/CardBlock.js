@@ -16,11 +16,13 @@ const CardBlock = () => {
   return (
     <CardBlockWrapper>
       <div className="ball">
-        <h1>互動式網頁設計</h1>
-        <h2>INTERACTIVE WEB DESIGN</h2>
-        <p>．UI 設計師．前端工程師</p>
-        <p>攜手合作</p>
-        <img alt="partner" src={partner} />
+        <div>
+          <h1>互動式網頁設計</h1>
+          <h2>INTERACTIVE WEB DESIGN</h2>
+          <p>．UI 設計師．前端工程師</p>
+          <p>攜手合作</p>
+          <img alt="partner" src={partner} />
+        </div>
       </div>
       <div className="cardsWrapper">
         <div className="cards">
@@ -79,19 +81,25 @@ const CardBlockWrapper = styled.div`
   position: relative;
   .ball {
     height: 858px;
-    background-image: url(${bg});
-    background-repeat: no-repeat;
+    background: url(${bg}) no-repeat;
+    background-position-x: center;
     text-align: center;
-    padding-top: 300px;
     line-height: 1.5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
     h1,
     h2 {
       font-size: 80px;
       font-weight: bold;
+      ${media.tablet`
+         font-size: 50px;
+      `}
     }
     h2 {
       color: #fff;
       margin-bottom: 30px;
+      font-family: GenosBold;
     }
     p {
       font-size: 30px;
@@ -100,15 +108,17 @@ const CardBlockWrapper = styled.div`
       margin-top: 30px;
     }
   }
+  .cardsWrapper {
+    padding-bottom: 100px;
+    background-color: #b3b9c7;
+  }
   ${media.pc`
-    .cardsWrapper {
-      padding-bottom: 100px;
-      background-color: #b3b9c7;
       .cards {
         margin: 0 auto;
-        padding-top: 200px;
+        padding-top: 260px;
         height: 970px;
         position: relative;
+        overflow: hidden;
         z-index: 1;
         .card {
           height: 490px;
@@ -135,22 +145,43 @@ const CardBlockWrapper = styled.div`
                 .week {
                   color: #201F20;
                 }
+                .info {
+                  opacity: 1; 
+                }
               }
             }
           }
           :nth-child(2) {
             .bg {
               background-image: url(${card2});
+              .week {
+                color: #edeb2f;
+              }
               :hover {
                 background-image: url(${card2hover});
+                .week {
+                  color: #201F20;
+                }
+                .info {
+                  opacity: 1; 
+                }
               }
             }
           }
           :nth-child(3) {
             .bg {
               background-image: url(${card3});
+              .week {
+                color: #5cafff;
+              }
               :hover {
                 background-image: url(${card3hover});
+                .week {
+                color: #201F20;
+                }
+                .info {
+                  opacity: 1; 
+                }
               }
             }
           }
@@ -184,6 +215,7 @@ const CardBlockWrapper = styled.div`
               flex: 1;
               justify-content: space-between;
               align-items: center;
+              opacity: 0;
               ul {
                 li {
                   font-size: 40px;
@@ -220,12 +252,13 @@ const CardBlockWrapper = styled.div`
                 font-size: 24px;
                 text-align: center;
                 border-radius: 99em;
+                cursor: pointer;
               }
             }
           }
         }
       }
-    }
+    
   `}
 `
 
