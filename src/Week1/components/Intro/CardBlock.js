@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import bg from '../../images/bg_week.png'
 import partner from '../../images/icon_partner.png'
 import card1 from '../../images/card_redesign.png'
@@ -10,6 +9,7 @@ import card2hover from '../../images/card_canvas_hover.png'
 import card3 from '../../images/card_js.png'
 import card3hover from '../../images/card_js_hover.png'
 import cardIcon from '../../images/bg_event_star.png'
+import sun from '../../images/sun_02.png'
 import media from 'lib/mediaQuery'
 
 const CardBlock = () => {
@@ -79,6 +79,16 @@ const CardBlock = () => {
 
 const CardBlockWrapper = styled.div`
   position: relative;
+  ::before {
+      content: '';
+      background-image: url(${sun}) ;
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      top:0;
+      right:0;
+      z-index:1 ;
+    }
   .ball {
     height: 858px;
     background: url(${bg}) no-repeat;
@@ -89,6 +99,7 @@ const CardBlockWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    z-index:2 ;
     ${media.tablet`
       height: 600px;
     `}
@@ -120,13 +131,13 @@ const CardBlockWrapper = styled.div`
     img {
       margin-top: 30px;
     }
+   
   }
   .cardsWrapper {
     padding-bottom: 100px;
     background-color: #b3b9c7;
     ${media.tablet`
-    padding-bottom: 50px;
-    
+      padding-bottom: 50px;
     `}
   }
   /* week01 */
