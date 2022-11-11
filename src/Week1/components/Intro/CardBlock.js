@@ -83,17 +83,27 @@ const CardBlockWrapper = styled.div`
     height: 858px;
     background: url(${bg}) no-repeat;
     background-position-x: center;
+    background-size: cover;
     text-align: center;
     line-height: 1.5;
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    ${media.tablet`
+      height: 600px;
+    `}
+    ${media.mobile`
+      height: 400px;
+    `}
     h1,
     h2 {
       font-size: 80px;
       font-weight: bold;
       ${media.tablet`
          font-size: 50px;
+      `}
+      ${media.mobile`
+        font-size: 30px;
       `}
     }
     h2 {
@@ -103,6 +113,9 @@ const CardBlockWrapper = styled.div`
     }
     p {
       font-size: 30px;
+      ${media.mobile`
+        font-size: 24px;
+      `}
     }
     img {
       margin-top: 30px;
@@ -111,22 +124,145 @@ const CardBlockWrapper = styled.div`
   .cardsWrapper {
     padding-bottom: 100px;
     background-color: #b3b9c7;
+    ${media.tablet`
+    padding-bottom: 50px;
+    
+    `}
   }
+  /* week01 */
+  .cards {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 100px;
+    ${media.mobile`
+    padding-top: 50px;
+    `}
+    .card {
+      width: 100%;
+      height: 260px;
+      margin-bottom: 50px;
+      ${media.mobile`
+        height:200px;
+      `}
+      :nth-child(1) {
+        .bg {
+          background-image: url(${card1hover});
+          background-color: #31cf84;
+        }
+      }
+      /* week02 */
+      :nth-child(2) {
+        .bg {
+          background-image: url(${card2hover});
+          background-color: #edeb2f;
+        }
+      }
+      /* week03 */
+      :nth-child(3) {
+        .bg {
+          background-image: url(${card3hover});
+          background-color: #5cb0ff;
+        }
+      }
+      .bg {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        padding: 4% 5%;
+        background-position: center top;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        box-shadow: 0 10px 10px rgb(0 0 0 / 25%);
+        .week {
+          font-family: Genos;
+          font-size: 35px;
+          text-align: right;
+          span {
+            font-family: GenosBold;
+            font-weight: bold;
+          }
+          ${media.mobile`
+            font-size: 22px;
+          `}
+        }
+        .info {
+          display: flex;
+          height: 100%;
+          justify-content: space-between;
+          align-items: flex-end;
+          ul {
+            li {
+              font-size: 24px;
+              position: relative;
+              padding-left: 40px;
+              margin-top: 20px;
+              ${media.mobile`
+                font-size: 18px;
+                padding-left: 20px;
+              `}
+              :before {
+                content: '';
+                position: absolute;
+                left: 0px;
+              }
+              :not(.hashtag):before {
+                width: 32px;
+                height: 24px;
+                background-image: url(${cardIcon});
+                background-repeat: no-repeat;
+                background-size: contain;
+                ${media.mobile`
+                  width: 24px;
+                  height: 18px;
+                `}
+              }
+              &.hashtag {
+                :before {
+                  content: '#';
+                }
+              }
+            }
+          }
+          button {
+            background-color: #201f20;
+            color: #fff;
+            border: none;
+            width: 140px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 20px;
+            text-align: center;
+            border-radius: 99em;
+            cursor: pointer;
+            ${media.mobile`
+              font-size: 16px;
+              width: 100px;
+              height: 30px;
+              line-height: 30px;
+            `}
+          }
+        }
+      }
+    }
+  }
+
   ${media.pc`
       .cards {
-        margin: 0 auto;
         padding-top: 260px;
         height: 970px;
         position: relative;
         overflow: hidden;
         z-index: 1;
+        width:100% ;
         .card {
           height: 490px;
-          width: 1240px;
+          width: 90%;
           margin: 0 auto;
           perspective: 900px;
           transition: 0.6s ease;
           will-change: transform;
+          max-width:1240px;
           margin-top: -250px;
           :hover {
             perspective: 2000px;
@@ -142,6 +278,7 @@ const CardBlockWrapper = styled.div`
               }
               :hover {
                 background-image: url(${card1hover});
+                background-color: #31cf84;
                 .week {
                   color: #201F20;
                 }
@@ -159,6 +296,7 @@ const CardBlockWrapper = styled.div`
               }
               :hover {
                 background-image: url(${card2hover});
+                background-color: #edeb2f;
                 .week {
                   color: #201F20;
                 }
@@ -176,6 +314,8 @@ const CardBlockWrapper = styled.div`
               }
               :hover {
                 background-image: url(${card3hover});
+                background-color: #5cb0ff;
+
                 .week {
                 color: #201F20;
                 }
@@ -199,14 +339,18 @@ const CardBlockWrapper = styled.div`
             transition: 0.3s ease;
             background-position: center top;
             background-repeat: no-repeat;
-            padding: 0 80px;
+            background-size: contain ;
+            background-color: #201f20 ;
+            padding: 5% 5% 0;
             display: flex;
             flex-direction: column;
             .week {
+              font-family:Genos;
               font-size: 50px;
               text-align: right;
-              margin-top: 80px;
+              /* margin-top: 5%; */
               span {
+                font-family:GenosBold;
                 font-weight: bold;
               }
             }
