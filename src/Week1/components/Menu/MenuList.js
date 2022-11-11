@@ -7,7 +7,7 @@ const MenuList = ({ menuOpen }) => {
   return (
       <MenuListContent className={`${menuOpen}`}>
         {menuList.map((v, i) => (
-          <MenuItem key={i} num={i} isOpen={menuOpen}>
+          <MenuItem key={i} num={i} isOpen={menuOpen} listLength={menuList.length}>
             {v.title}
           </MenuItem>
         ))}
@@ -29,15 +29,17 @@ const MenuListContent = styled.div`
     right: 0;
     ${media.tablet`
     right: 0;
+    top:0;
     `}
   }
   ${media.tablet`
     width:100%;
-    right:-100%;
+    top:-100%;
+    right:0;
     padding: 20% 0 0;
   `}
   ${media.mobile`
-    padding: 5% 0 0;
+    padding: 80px 0 0;
   `}
 `
 const MenuItem = styled.div`
@@ -47,7 +49,8 @@ const MenuItem = styled.div`
   color: #848484;
   text-align: center;
   font-size: 24px;
-  height: 100px;
+  height: ${props=>100/props.listLength}%;
+  max-height: 100px;
   opacity: 0;
   cursor: pointer;
 
