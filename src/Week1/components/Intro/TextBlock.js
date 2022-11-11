@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import media from 'lib/mediaQuery'
 import dialog from '../../images/dialog01.png'
 
 const TextBlock = () => {
@@ -25,6 +25,7 @@ const TextBlock = () => {
 
 const TextBlockWrapper = styled.div`
   font-weight: bold;
+  width: 90%;
   max-width: 800px;
   margin: 0 auto;
   height: 100vh;
@@ -49,22 +50,34 @@ const TextBlockWrapper = styled.div`
     color: #fff;
     font-size: 50px;
     margin-top: 100px;
+    ${media.mobile`
+        font-size: 30px;
+      `}
   }
   .q2 {
     text-align: center;
     span {
       font-size: 40px;
+      ${media.mobile`
+        font-size: 20px;
+      `}
     }
   }
   .q3 {
     span {
       font-size: 30px;
+      ${media.mobile`
+        font-size: 16px;
+      `}
     }
   }
   .q4 {
     text-align: right;
     span {
       font-size: 40px;
+      ${media.mobile`
+        font-size: 20px;
+      `}
     }
   }
 `
