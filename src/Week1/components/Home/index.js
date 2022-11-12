@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback, useEffect, useRef } from 'react'
 import { useWindowDimensions } from 'useHooks'
 import { loadFull } from 'tsparticles'
 import styled from 'styled-components'
@@ -17,10 +17,30 @@ import { PC_BREAKPOINT_WIDTH } from 'config/breakpoint'
 
 const Home = () => {
   const windowWidth = useWindowDimensions().width
+  const windowHeight = useWindowDimensions().height
   const isPC = windowWidth >= PC_BREAKPOINT_WIDTH
   const homeRef = useRef(null)
+  const scrollTopRef = useRef(0)
+
   const particlesInit = useCallback(async (engine) => {
     await loadFull(engine)
+  }, [])
+
+  useEffect(() => {
+    const scrollPage = (ev) => {
+      ev.preventDefault()
+      if (window.scrollY > scrollTopRef.current && scrollTopRef.current < 5) {
+        window.scrollTo({
+          top: window.innerHeight,
+          behavior: 'smooth',
+        })
+      }
+      scrollTopRef.current = window.scrollY
+    }
+
+    window.addEventListener('scroll', scrollPage)
+
+    return () => window.removeEventListener('scroll', scrollPage)
   }, [])
 
   return (

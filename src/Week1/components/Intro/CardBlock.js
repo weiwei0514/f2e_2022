@@ -80,15 +80,15 @@ const CardBlock = () => {
 const CardBlockWrapper = styled.div`
   position: relative;
   ::before {
-      content: '';
-      background-image: url(${sun}) ;
-      position: absolute;
-      width: 360px;
-      height: 360px;
-      top:0;
-      right:0;
-      z-index:1 ;
-    }
+    content: '';
+    background-image: url(${sun});
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    top: 0;
+    right: 0;
+    z-index: 1;
+  }
   .ball {
     height: 858px;
     background: url(${bg}) no-repeat;
@@ -99,7 +99,7 @@ const CardBlockWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    z-index:2 ;
+    z-index: 2;
     ${media.tablet`
       height: 600px;
     `}
@@ -131,7 +131,6 @@ const CardBlockWrapper = styled.div`
     img {
       margin-top: 30px;
     }
-   
   }
   .cardsWrapper {
     padding-bottom: 100px;
