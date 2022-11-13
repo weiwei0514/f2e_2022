@@ -17,7 +17,6 @@ import { PC_BREAKPOINT_WIDTH } from 'config/breakpoint'
 
 const Home = () => {
   const windowWidth = useWindowDimensions().width
-  const windowHeight = useWindowDimensions().height
   const isPC = windowWidth >= PC_BREAKPOINT_WIDTH
   const homeRef = useRef(null)
   const scrollTopRef = useRef(0)
@@ -26,22 +25,29 @@ const Home = () => {
     await loadFull(engine)
   }, [])
 
-  useEffect(() => {
-    const scrollPage = (ev) => {
-      ev.preventDefault()
-      if (window.scrollY > scrollTopRef.current && scrollTopRef.current < 5) {
-        window.scrollTo({
-          top: window.innerHeight,
-          behavior: 'smooth',
-        })
-      }
-      scrollTopRef.current = window.scrollY
+  const scrollAnimation = useCallback(async () => {
+    const { innerHeight, scrollY } = window
+
+    if (scrollTopRef.current < innerHeight) {
+      window.scrollTo({ top: scrollY + innerHeight / 80 })
+
+      setTimeout(async () => await scrollAnimation(), 1)
+    }
+  }, [])
+
+  const scrollPage = useCallback(() => {
+    if (window.scrollY > scrollTopRef.current && scrollTopRef.current < 5) {
+      scrollAnimation()
     }
 
+    scrollTopRef.current = window.scrollY
+  }, [scrollAnimation])
+
+  useEffect(() => {
     window.addEventListener('scroll', scrollPage)
 
     return () => window.removeEventListener('scroll', scrollPage)
-  }, [])
+  }, [scrollPage])
 
   return (
     <HomeWrapper ref={homeRef}>
@@ -142,7 +148,7 @@ const Ball = styled.div`
     width: 100%;
     height: 100%;
     background: url(${ball}) no-repeat;
-    background-position: center;
+    background-position: fixed;
     background-size: contain;
   }
   .title {

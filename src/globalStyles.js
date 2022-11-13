@@ -1,7 +1,7 @@
-import { createGlobalStyle } from "styled-components"
-import Genos from "./fonts/Genos-Medium.ttf"
-import GenosBold from "./fonts/Genos-Bold.ttf"
-import Glory from "./fonts/Glory-Medium.ttf"
+import { createGlobalStyle } from 'styled-components'
+import Genos from './fonts/Genos-Medium.ttf'
+import GenosBold from './fonts/Genos-Bold.ttf'
+import Glory from './fonts/Glory-Medium.ttf'
 const GlobalStyle = createGlobalStyle`
   body {
     width:100%;

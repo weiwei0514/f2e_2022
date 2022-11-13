@@ -50,9 +50,9 @@ export function useGetStepsTop() {
       setTop(getWindowDimensions().height - getStepsPosition())
     }
     handleWheel()
-    window.addEventListener('scroll',handleWheel)
+    window.addEventListener('scroll', handleWheel)
     return () => {
-      window.removeEventListener('scroll',handleWheel)
+      window.removeEventListener('scroll', handleWheel)
     }
   }, [root])
 
@@ -66,10 +66,10 @@ export function useScrollTop() {
     const handleScrollTop = () => {
       setScrollTop(document.documentElement.scrollTop)
     }
-    window.addEventListener("scroll", handleScrollTop)
+    window.addEventListener('scroll', handleScrollTop)
     handleScrollTop()
 
-    return () => window.removeEventListener("scroll", handleScrollTop)
+    return () => window.removeEventListener('scroll', handleScrollTop)
   }, [])
   return scrollTop
 }
