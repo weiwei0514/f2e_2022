@@ -29,15 +29,15 @@ const Home = () => {
     const { innerHeight, scrollY } = window
 
     if (scrollTopRef.current < innerHeight) {
-      window.scrollTo({ top: scrollY + innerHeight / 80 })
+      window.scrollTo({ top: scrollY + innerHeight / (100 + scrollY * 0.2) })
 
       setTimeout(async () => await scrollAnimation(), 1)
     }
   }, [])
 
-  const scrollPage = useCallback(() => {
+  const scrollPage = useCallback(async () => {
     if (window.scrollY > scrollTopRef.current && scrollTopRef.current < 5) {
-      scrollAnimation()
+      await scrollAnimation()
     }
 
     scrollTopRef.current = window.scrollY
@@ -148,7 +148,7 @@ const Ball = styled.div`
     width: 100%;
     height: 100%;
     background: url(${ball}) no-repeat;
-    background-position: fixed;
+    background-position: center;
     background-size: contain;
   }
   .title {
