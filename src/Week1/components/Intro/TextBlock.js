@@ -39,12 +39,25 @@ const TextBlockWrapper = styled.div`
     content: '';
     position: absolute;
     background: url(${sun}) no-repeat;
+    background-position:center center;
     background-size: contain;
     width: 30%;
     max-width: 296px;
     height: 100%;
-    top: 10%;
+    top: 0;
     left: -20%;
+    animation:sunSpin 4s linear infinite;
+    @keyframes sunSpin {
+      from {
+        transform: rotate(0deg);
+      }
+      50% {
+        transform: rotate(180deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
   }
   .face {
     position: absolute;
@@ -53,10 +66,12 @@ const TextBlockWrapper = styled.div`
       max-width: 117px;
       right: 0;
       top: 10%;
+      animation: astronaut-float 10s ease infinite;
     }
     &.face02 {
       width: 15%;
       max-width: 92px;
+      animation: astronaut-float 8s ease infinite;
     }
   }
   .q1 {
@@ -108,6 +123,22 @@ const TextBlockWrapper = styled.div`
       ${media.mobile`
         font-size: 20px;
       `}
+    }
+  }
+  @keyframes astronaut-float {
+    0% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-20px) rotate(-6deg);
+      transform-origin: 50% 50%;
+    }
+    80% {
+      transform: translateY(20px) rotate(6deg);
+      transform-origin: 50% 50%;
+    }
+    100% {
+      transform: translateY(0);
     }
   }
 `
