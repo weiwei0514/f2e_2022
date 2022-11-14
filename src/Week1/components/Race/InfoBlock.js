@@ -164,6 +164,7 @@ const InfoBlockWrapper = styled.div`
     width: 48%;
     display: flex;
     flex-direction: column;
+    z-index: 3;
     section {
       padding: 50px 10% 80px;
       background: #201f20;
@@ -172,7 +173,8 @@ const InfoBlockWrapper = styled.div`
       border-bottom-width: 5px;
       border-radius: 20px;
       flex: 1;
-      z-index: 1;
+      z-index: 2;
+
       h6 {
         font-size: 40px;
         font-weight: bold;

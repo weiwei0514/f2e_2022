@@ -79,16 +79,6 @@ const CardBlock = () => {
 
 const CardBlockWrapper = styled.div`
   position: relative;
-  ::before {
-    content: '';
-    background-image: url(${sun});
-    position: absolute;
-    width: 360px;
-    height: 360px;
-    top: 0;
-    right: 0;
-    z-index: 1;
-  }
   .ball {
     height: 858px;
     background: url(${bg}) no-repeat;
