@@ -29,7 +29,7 @@ const Home = () => {
     const { innerHeight, scrollY } = window
 
     if (scrollTopRef.current < innerHeight) {
-      window.scrollTo({ top: scrollY + innerHeight / (100 + scrollY * 0.2) })
+      window.scrollTo({ top: scrollY + innerHeight / (10 + scrollY * 0.2) })
 
       setTimeout(async () => await scrollAnimation(), 1)
     }
