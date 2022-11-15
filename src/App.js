@@ -3,7 +3,7 @@ import RouterView from './Router'
 import GlobalStyle from './globalStyles'
 import { useTitle } from './useHooks'
 function App() {
-  const path = window.location.pathname.split('/')[2]
+  const path = window.location.pathname.split('/')[3]
   const title = {
     week1: 'The F2E 活動網站設計',
     week2: '今晚，我想來點點簽',
@@ -11,7 +11,7 @@ function App() {
   }
   useTitle(title[path])
   return (
-    <Router>
+    <Router hashType="slash">
       <GlobalStyle />
       <RouterView />
     </Router>
