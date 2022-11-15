@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react'
+import React, { useCallback } from 'react'
 import { useWindowDimensions } from 'useHooks'
 import { loadFull } from 'tsparticles'
 import styled from 'styled-components'
@@ -18,39 +18,13 @@ import { PC_BREAKPOINT_WIDTH } from 'config/breakpoint'
 const Home = () => {
   const windowWidth = useWindowDimensions().width
   const isPC = windowWidth >= PC_BREAKPOINT_WIDTH
-  const homeRef = useRef(null)
-  const scrollTopRef = useRef(0)
 
   const particlesInit = useCallback(async (engine) => {
     await loadFull(engine)
   }, [])
 
-  const scrollAnimation = useCallback(async () => {
-    const { innerHeight, scrollY } = window
-
-    if (scrollTopRef.current < innerHeight) {
-      window.scrollTo({ top: scrollY + innerHeight / (10 + scrollY * 0.2) })
-
-      setTimeout(async () => await scrollAnimation(), 1)
-    }
-  }, [])
-
-  const scrollPage = useCallback(async () => {
-    if (window.scrollY > scrollTopRef.current && scrollTopRef.current < 5) {
-      await scrollAnimation()
-    }
-
-    scrollTopRef.current = window.scrollY
-  }, [scrollAnimation])
-
-  useEffect(() => {
-    window.addEventListener('scroll', scrollPage)
-
-    return () => window.removeEventListener('scroll', scrollPage)
-  }, [scrollPage])
-
   return (
-    <HomeWrapper ref={homeRef}>
+    <HomeWrapper>
       <Particles
         id="tsparticles"
         init={particlesInit}
