@@ -9,7 +9,6 @@ import card2hover from '../../images/card_canvas_hover.png'
 import card3 from '../../images/card_js.png'
 import card3hover from '../../images/card_js_hover.png'
 import cardIcon from '../../images/bg_event_star.png'
-import sun from '../../images/sun_02.png'
 import media from 'lib/mediaQuery'
 
 const CardBlock = () => {
