@@ -2,10 +2,11 @@ import React, { useRef } from "react"
 import styled from "styled-components"
 import upload from "Week2/images/upload.png"
 
-const Step1 = ({setCurrentStep,setSignatureImg,setMessage,setWrong}) => {
+const Step1 = ({ setCurrentStep, setSignatureImg, setMessage, setWrong }) => {
   const fileRef = useRef(null)
   const handlePdf = (e) => {
     const file = e.target.files[0]
+
     if (file.type === "application/pdf") {
       // 判斷檔案大小
       if (file.size > 10000000) {
@@ -49,24 +50,23 @@ const Step1 = ({setCurrentStep,setSignatureImg,setMessage,setWrong}) => {
       // fileReader.readAsArrayBuffer(file)
     } else {
       setMessage("檔案格式錯誤，請重新選擇")
-        setWrong(true)
+      setWrong(true)
     }
   }
   return (
     <Step1Wrapper>
       <h1>請由此處上傳簽署檔案</h1>
       <img src={upload} alt="" />
-      <div className="upload-btn">
+      <label className="upload-btn">
         <input
           ref={fileRef}
           onChange={handlePdf}
-          accept=".pdf"
           id="file"
           type="file"
           style={{ display: "none" }}
         />
-        <button onClick={() => fileRef.current.click()}>選擇檔案</button>
-      </div>
+        選擇檔案
+      </label>
       <h2>或直接拖放檔案進來</h2>
     </Step1Wrapper>
   )
@@ -96,22 +96,20 @@ const Step1Wrapper = styled.div`
     margin: 75px 0;
   }
   .upload-btn {
-    button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 120px;
-      height: 32px;
-      border: 1px solid #696cff;
-      background: #fff;
-      border-radius: 5px;
-      font-size: 16px;
-      color: #696cff;
-      cursor: pointer;
-      :hover {
-        background: #696cff;
-        color: #fff;
-      }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 32px;
+    border: 1px solid #696cff;
+    background: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #696cff;
+    cursor: pointer;
+    :hover {
+      background: #696cff;
+      color: #fff;
     }
     margin-bottom: 20px;
   }
