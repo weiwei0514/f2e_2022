@@ -68,8 +68,6 @@ const Sign = () => {
 const SignWrapper = styled.div`
   position: relative;
   height: 100%;
-  display: flex;
-  flex-direction: column;
   .message {
     display: flex;
     align-items: center;

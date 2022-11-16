@@ -11,8 +11,7 @@ import Trash from "Week2/components/Trash"
 import Setting from "Week2/components/Setting"
 import Support from "Week2/components/Support"
 import Sign from "Week2/components/Sign"
-// import Signature from './Signature'
-// import Pdf from './Pdf'
+
 const Week2 = () => {
   const [mainArea, setMainArea] = useState("Home")
   const main = {
@@ -31,11 +30,6 @@ const Week2 = () => {
         <Member />
         {main[mainArea]}
       </MainArea>
-      {/* <Signature
-        signatureImg={signatureImg}
-        setSignatureImg={setSignatureImg}
-      />
-      <Pdf signatureImg={signatureImg} /> */}
     </Week2Wrapper>
   )
 }
@@ -48,7 +42,7 @@ const Week2Wrapper = styled.div`
 const MainArea = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
+  width:100%;
   min-height: 100vh;
   padding: 25px 5% 25px;
   overflow: overlay;

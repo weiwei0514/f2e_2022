@@ -39,7 +39,7 @@ const StyledReactModal = styled.div`
     transition: 0.3s ease-out;
   }
 `
-export default ({
+const ReactModal = ({
   isOpen = false,
   onModalClose,
   children,
@@ -72,3 +72,5 @@ export default ({
     </StyledReactModal>
   )
 }
+
+export default ReactModal

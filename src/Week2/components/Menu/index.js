@@ -42,6 +42,7 @@ const MenuWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   overflow: overlay;
+  flex-shrink: 0;
   .logo {
     width: 100%;
     object-fit: scale-down;
@@ -72,7 +73,7 @@ const MenuWrapper = styled.div`
 
 const MenuList = styled.div`
   width: 100%;
-  margin-bottom:150px;
+  margin-bottom: 150px;
   flex: 1;
 `
 
