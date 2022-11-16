@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from "react"
-import styled from "styled-components"
-import { MdModeEditOutline } from "react-icons/md"
-import { pdfjs } from "react-pdf"
-import { fabric } from "fabric"
-import { TbSignature, TbArrowBackUp } from "react-icons/tb"
-import { BiCalendar } from "react-icons/bi"
-import { CgFormatText } from "react-icons/cg"
-import ReactModal from "common/ReactModal"
-import Signature from "./Signature"
+import React, { useState, useEffect, useRef } from 'react'
+import styled from 'styled-components'
+import { MdModeEditOutline } from 'react-icons/md'
+import { pdfjs } from 'react-pdf'
+import { fabric } from 'fabric'
+import { TbSignature, TbArrowBackUp } from 'react-icons/tb'
+import { BiCalendar } from 'react-icons/bi'
+import { CgFormatText } from 'react-icons/cg'
+import ReactModal from 'common/ReactModal'
+import Signature from './Signature'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
 
 const Step2 = ({
@@ -34,7 +34,7 @@ const Step2 = ({
           const pageNumber = 1
 
           pdf.getPage(pageNumber).then((page) => {
-            const scale = 1
+            const scale = 1.5
             const viewport = page.getViewport({ scale })
 
             canvasRef.current.height = viewport.height
@@ -42,13 +42,13 @@ const Step2 = ({
 
             const renderContext = {
               viewport,
-              canvasContext: canvasRef.current.getContext("2d"),
+              canvasContext: canvasRef.current.getContext('2d'),
             }
 
             const renderTask = page.render(renderContext)
 
             renderTask.promise.then(() => {
-              console.log("Page rendered")
+              console.log('Page rendered')
             })
           })
         },
@@ -61,7 +61,7 @@ const Step2 = ({
   useEffect(() => {
     if (!file) return
     pdfLoader(file)
-    setFileName(file.name.split(".pdf")[0])
+    setFileName(file.name.split('.pdf')[0])
   }, [file])
   return (
     <Step2Wrapper>
@@ -107,7 +107,10 @@ const Step2 = ({
         </div>
       </Toolbar>
       <ReactModal isOpen={signPopup} onModalClose={() => setSignPopup(false)}>
-        <Signature onModalClose={() => setSignPopup(false)} setSignatureImg={setSignatureImg}/>
+        <Signature
+          onModalClose={() => setSignPopup(false)}
+          setSignatureImg={setSignatureImg}
+        />
       </ReactModal>
     </Step2Wrapper>
   )
@@ -163,9 +166,9 @@ const TitleArea = styled.div`
 `
 
 const PdfArea = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
+  flex: 1 1 0;
+  text-align: center;
+  margin: 0 auto 25px;
   overflow-y: overlay;
 `
 

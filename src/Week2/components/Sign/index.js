@@ -1,19 +1,19 @@
-import React, { useState, useEffect, Fragment } from "react"
-import styled from "styled-components"
-import Step1 from "./components/Step1"
-import Step2 from "./components/Step2"
-import Step3 from "./components/Step3"
-import { AiOutlineInfoCircle } from "react-icons/ai"
+import React, { useState, useEffect, Fragment } from 'react'
+import styled from 'styled-components'
+import Step1 from './components/Step1'
+import Step2 from './components/Step2'
+import Step3 from './components/Step3'
+import { AiOutlineInfoCircle } from 'react-icons/ai'
 
 const Sign = () => {
   const [currentStep, setCurrentStep] = useState(0)
   const [signatureImg, setSignatureImg] = useState(null)
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState('')
   const [wrong, setWrong] = useState(false)
   const [file, setFile] = useState(null)
-  const [fileName, setFileName] = useState("")
+  const [fileName, setFileName] = useState('')
 
-  const steps = ["上傳檔案", "進行簽署", "預覽儲存"]
+  const steps = ['上傳檔案', '進行簽署', '預覽儲存']
   const step = {
     0: (
       <Step1
@@ -58,7 +58,7 @@ const Sign = () => {
         ))}
       </Steps>
       {step[currentStep]}
-      <div className={`message ${wrong ? "active" : ""}`}>
+      <div className={`message ${wrong ? 'active' : ''}`}>
         <AiOutlineInfoCircle />
         {message}
       </div>
@@ -105,7 +105,7 @@ const Step = styled.div`
     width: 22px;
     height: 22px;
     background: ${(props) =>
-      props.currentStep === props.step ? "#696CFF" : "#697a8d"};
+      props.currentStep === props.step ? '#696CFF' : '#697a8d'};
     border-radius: 50%;
     color: #fff;
     margin-right: 10px;
