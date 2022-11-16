@@ -168,7 +168,7 @@ const TitleArea = styled.div`
 const PdfArea = styled.div`
   flex: 1 1 0;
   text-align: center;
-  margin: 0 auto 25px;
+  margin: 0 auto 0;
   overflow-y: overlay;
 `
 

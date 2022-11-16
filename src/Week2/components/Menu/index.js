@@ -1,14 +1,14 @@
-import React from "react"
-import styled from "styled-components"
-import logo from "../../images/logo.png"
-import { menuList } from "./doc"
-import MenuItem from "./MenuItem"
-import ad from "../../images/ad.png"
+import React from 'react'
+import styled from 'styled-components'
+import logo from '../../images/logo.png'
+import { menuList } from './doc'
+import MenuItem from './MenuItem'
+import ad from '../../images/ad.png'
 const Menu = ({ mainArea, setMainArea }) => {
   return (
     <MenuWrapper>
       <img className="logo" src={logo} alt="" />
-      <div className="start-btn" onClick={() => setMainArea("Sign")}>
+      <div className="start-btn" onClick={() => setMainArea('Sign')}>
         <span className="icon">＋</span>
         <span>開始簽署</span>
       </div>
@@ -41,6 +41,7 @@ const MenuWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: overlay;
   .logo {
     width: 100%;
     object-fit: scale-down;
@@ -50,6 +51,7 @@ const MenuWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     background: #696cff;
     border-radius: 100px;
     margin-bottom: 50px;
@@ -70,6 +72,7 @@ const MenuWrapper = styled.div`
 
 const MenuList = styled.div`
   width: 100%;
+  margin-bottom:150px;
   flex: 1;
 `
 
@@ -79,13 +82,14 @@ const Upgrade = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  flex-shrink: 0;
   width: 170px;
   height: 110px;
   background: #f1f1ff;
   border-radius: 15px;
   color: #252525;
   ::before {
-    content: "";
+    content: '';
     position: absolute;
     background: url(${ad}) no-repeat;
     background-position: center center;
@@ -106,7 +110,7 @@ const Upgrade = styled.div`
     color: #696cff;
     border: 2px solid #696cff;
     border-radius: 5px;
-    font-family: "Microsoft YaHei";
+    font-family: 'Microsoft YaHei';
     font-weight: bold;
     font-size: 14px;
     margin-top: 5px;

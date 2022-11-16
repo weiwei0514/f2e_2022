@@ -50,6 +50,7 @@ const MainArea = styled.div`
   flex-direction: column;
   flex: 1;
   min-height: 100vh;
-  padding: 25px 5% 0;
+  padding: 25px 5% 25px;
+  overflow: overlay;
 `
 export default Week2
