@@ -8,6 +8,7 @@ import { BiCalendar } from 'react-icons/bi'
 import { CgFormatText } from 'react-icons/cg'
 import ReactModal from 'common/ReactModal'
 import Signature from './Signature'
+import { useCallback } from 'react'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
 const Base64Prefix = 'data:application/pdf;base64,'
 const Step2 = ({
@@ -16,7 +17,7 @@ const Step2 = ({
   setFileName,
   fileName,
   setSignatureImg,
-  signatureImg
+  signatureImg,
 }) => {
   const [isEdit, setIsEdit] = useState(false)
   const [signPopup, setSignPopup] = useState(false)
@@ -33,7 +34,7 @@ const Step2 = ({
     })
   }
 
-  async function printPDF(pdfData) {
+  const printPDF = useCallback(async (pdfData) => {
     // 將檔案處理成 base64
     pdfData = await readBlob(pdfData)
 
@@ -54,13 +55,13 @@ const Step2 = ({
     canvas.width = viewport.width
     const renderContext = {
       canvasContext: context,
-      viewport
+      viewport,
     }
     const renderTask = pdfPage.render(renderContext)
 
     // 回傳做好的 PDF canvas
     return renderTask.promise.then(() => canvas)
-  }
+  }, [])
 
   async function pdfToImage(pdfData) {
     // 設定 PDF 轉為圖片時的比例
@@ -70,34 +71,31 @@ const Step2 = ({
     return new fabric.Image(pdfData, {
       id: 'renderPDF',
       scaleX: scale,
-      scaleY: scale
+      scaleY: scale,
     })
   }
 
-  /** 建立主要的 canvas */
-  useEffect(() => {
-    const c = new fabric.Canvas(canvasRef.current)
-    setCanvas(c)
-  }, [canvasRef])
-
   /** 填上背景檔案 */
   useEffect(() => {
-    if (canvas && file) {
-      async function setBg(file) {
-        canvas.requestRenderAll()
+    const c = new fabric.Canvas(canvasRef.current)
+    if (file) {
+      async function setBg() {
+        c.requestRenderAll()
         const pdfData = await printPDF(file)
         const pdfImage = await pdfToImage(pdfData)
 
         // 透過比例設定 canvas 尺寸
-        canvas.setWidth(pdfImage.width / window.devicePixelRatio)
-        canvas.setHeight(pdfImage.height / window.devicePixelRatio)
+        c.setWidth(pdfImage.width / window.devicePixelRatio)
+        c.setHeight(pdfImage.height / window.devicePixelRatio)
 
         // 將 PDF 畫面設定為背景
-        canvas.setBackgroundImage(pdfImage, canvas.renderAll.bind(canvas))
+        c.setBackgroundImage(pdfImage, c.renderAll.bind(c))
+
+        setCanvas(c)
       }
-      setBg(file)
+      setBg()
     }
-  }, [canvas, file])
+  }, [file, printPDF])
 
   /** 加上簽名 */
   useEffect(() => {
@@ -111,11 +109,11 @@ const Step2 = ({
       })
     }
   }, [canvas, signatureImg])
-  
+
   useEffect(() => {
     if (!file) return
     setFileName(file.name.split('.pdf')[0])
-  }, [file])
+  }, [file, setFileName])
 
   return (
     <Step2Wrapper>
@@ -140,7 +138,7 @@ const Step2 = ({
         </div>
       </TitleArea>
       <PdfArea>
-        <canvas width ref={canvasRef} />
+        <canvas ref={canvasRef} />
       </PdfArea>
       <Toolbar>
         <div onClick={() => setSignPopup(true)}>

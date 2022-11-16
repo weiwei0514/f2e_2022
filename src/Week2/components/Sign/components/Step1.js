@@ -26,7 +26,7 @@ const Step1 = ({ setCurrentStep, setMessage, setWrong, setFile }) => {
     name: 'file',
     hoverTitle: '拖曳至此',
     children: <div className="upload-btn">選擇檔案</div>,
-    classes: 'drop_area'
+    classes: 'drop_area',
   }
   return (
     <Step1Wrapper>
@@ -47,6 +47,7 @@ const Step1Wrapper = styled.div`
   box-shadow: 0px 2px 6px rgba(105, 122, 141, 0.1);
   border-radius: 10px;
   padding: 40px 0;
+  /* height: calc(100% - 82px); */
   h1 {
     font-size: 26px;
     color: #252525;

@@ -1,19 +1,19 @@
-import React, { useState } from "react"
-import styled from "styled-components"
+import React, { useState } from 'react'
+import styled from 'styled-components'
 
 // components
-import Menu from "Week2/components/Menu"
-import Member from "Week2/components/Member"
-import Home from "Week2/components/Home"
-import Files from "Week2/components/Files"
-import Archive from "Week2/components/Archive"
-import Trash from "Week2/components/Trash"
-import Setting from "Week2/components/Setting"
-import Support from "Week2/components/Support"
-import Sign from "Week2/components/Sign"
+import Menu from 'Week2/components/Menu'
+import Member from 'Week2/components/Member'
+import Home from 'Week2/components/Home'
+import Files from 'Week2/components/Files'
+import Archive from 'Week2/components/Archive'
+import Trash from 'Week2/components/Trash'
+import Setting from 'Week2/components/Setting'
+import Support from 'Week2/components/Support'
+import Sign from 'Week2/components/Sign'
 
 const Week2 = () => {
-  const [mainArea, setMainArea] = useState("Home")
+  const [mainArea, setMainArea] = useState('Home')
   const main = {
     Home: <Home />,
     Files: <Files />,
@@ -42,9 +42,9 @@ const Week2Wrapper = styled.div`
 const MainArea = styled.div`
   display: flex;
   flex-direction: column;
-  width:100%;
+  width: 100%;
   min-height: 100vh;
-  padding: 25px 5% 25px;
+  padding: 25px 5%;
   overflow: overlay;
 `
 export default Week2
