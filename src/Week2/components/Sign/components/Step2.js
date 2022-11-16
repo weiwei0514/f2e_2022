@@ -9,60 +9,114 @@ import { CgFormatText } from 'react-icons/cg'
 import ReactModal from 'common/ReactModal'
 import Signature from './Signature'
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
-
+const Base64Prefix = 'data:application/pdf;base64,'
 const Step2 = ({
   file,
   setCurrentStep,
   setFileName,
   fileName,
   setSignatureImg,
-  signatureImg,
+  signatureImg
 }) => {
   const [isEdit, setIsEdit] = useState(false)
   const [signPopup, setSignPopup] = useState(false)
+  const [canvas, setCanvas] = useState(null)
   const canvasRef = useRef(null)
-  const exportRef = useRef(null)
-  const pdfLoader = (file) => {
-    const fileReader = new FileReader()
 
-    fileReader.onload = function () {
-      const pdfData = new Uint8Array(this.result)
-      const loadingTask = pdfjs.getDocument({ data: pdfData })
-
-      loadingTask.promise.then(
-        (pdf) => {
-          const pageNumber = 1
-
-          pdf.getPage(pageNumber).then((page) => {
-            const scale = 1.5
-            const viewport = page.getViewport({ scale })
-
-            canvasRef.current.height = viewport.height
-            canvasRef.current.width = viewport.width
-
-            const renderContext = {
-              viewport,
-              canvasContext: canvasRef.current.getContext('2d'),
-            }
-
-            const renderTask = page.render(renderContext)
-
-            renderTask.promise.then(() => {
-              console.log('Page rendered')
-            })
-          })
-        },
-        (reason) => console.error(reason)
-      )
-    }
-
-    fileReader.readAsArrayBuffer(file)
+  // 使用原生 FileReader 轉檔
+  function readBlob(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.addEventListener('load', () => resolve(reader.result))
+      reader.addEventListener('error', reject)
+      reader.readAsDataURL(blob)
+    })
   }
+
+  async function printPDF(pdfData) {
+    // 將檔案處理成 base64
+    pdfData = await readBlob(pdfData)
+
+    // 將 base64 中的前綴刪去，並進行解碼
+    const data = atob(pdfData.substring(Base64Prefix.length))
+
+    // 利用解碼的檔案，載入 PDF 檔及第一頁
+    const pdfDoc = await pdfjs.getDocument({ data }).promise
+    const pdfPage = await pdfDoc.getPage(1)
+
+    // 設定尺寸及產生 canvas
+    const viewport = pdfPage.getViewport({ scale: window.devicePixelRatio })
+    const canvas = document.createElement('canvas')
+    const context = canvas.getContext('2d')
+
+    // 設定 PDF 所要顯示的寬高及渲染
+    canvas.height = viewport.height
+    canvas.width = viewport.width
+    const renderContext = {
+      canvasContext: context,
+      viewport
+    }
+    const renderTask = pdfPage.render(renderContext)
+
+    // 回傳做好的 PDF canvas
+    return renderTask.promise.then(() => canvas)
+  }
+
+  async function pdfToImage(pdfData) {
+    // 設定 PDF 轉為圖片時的比例
+    const scale = 1 / window.devicePixelRatio
+
+    // 回傳圖片
+    return new fabric.Image(pdfData, {
+      id: 'renderPDF',
+      scaleX: scale,
+      scaleY: scale
+    })
+  }
+
+  /** 建立主要的 canvas */
+  useEffect(() => {
+    const c = new fabric.Canvas(canvasRef.current)
+    setCanvas(c)
+  }, [canvasRef])
+
+  /** 填上背景檔案 */
+  useEffect(() => {
+    if (canvas && file) {
+      async function setBg(file) {
+        canvas.requestRenderAll()
+        const pdfData = await printPDF(file)
+        const pdfImage = await pdfToImage(pdfData)
+
+        // 透過比例設定 canvas 尺寸
+        canvas.setWidth(pdfImage.width / window.devicePixelRatio)
+        canvas.setHeight(pdfImage.height / window.devicePixelRatio)
+
+        // 將 PDF 畫面設定為背景
+        canvas.setBackgroundImage(pdfImage, canvas.renderAll.bind(canvas))
+      }
+      setBg(file)
+    }
+  }, [canvas, file])
+
+  /** 加上簽名 */
+  useEffect(() => {
+    if (canvas && signatureImg) {
+      fabric.Image.fromURL(signatureImg, function (image) {
+        // 設定簽名出現的位置及大小，後續可調整
+        image.top = 100
+        image.scaleX = 0.5
+        image.scaleY = 0.5
+        canvas.add(image)
+      })
+    }
+  }, [canvas, signatureImg])
+  
   useEffect(() => {
     if (!file) return
-    pdfLoader(file)
     setFileName(file.name.split('.pdf')[0])
   }, [file])
+
   return (
     <Step2Wrapper>
       <TitleArea>
@@ -86,7 +140,7 @@ const Step2 = ({
         </div>
       </TitleArea>
       <PdfArea>
-        <canvas ref={canvasRef} />
+        <canvas width ref={canvasRef} />
       </PdfArea>
       <Toolbar>
         <div onClick={() => setSignPopup(true)}>
