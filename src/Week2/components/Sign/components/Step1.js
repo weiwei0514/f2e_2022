@@ -1,12 +1,10 @@
-import React, { useRef } from "react"
+import React from "react"
 import styled from "styled-components"
 import upload from "Week2/images/upload.png"
+import { FileUploader } from "react-drag-drop-files"
 
-const Step1 = ({ setCurrentStep, setSignatureImg, setMessage, setWrong }) => {
-  const fileRef = useRef(null)
-  const handlePdf = (e) => {
-    const file = e.target.files[0]
-
+const Step1 = ({ setCurrentStep, setMessage, setWrong, setFile }) => {
+  const handlePdf = (file) => {
     if (file.type === "application/pdf") {
       // 判斷檔案大小
       if (file.size > 10000000) {
@@ -14,64 +12,33 @@ const Step1 = ({ setCurrentStep, setSignatureImg, setMessage, setWrong }) => {
         setWrong(true)
         return
       }
-      // const fileReader = new FileReader()
-
-      // fileReader.onload = function () {
-      //   const pdfData = new Uint8Array(this.result)
-      //   const loadingTask = pdfjs.getDocument({ data: pdfData })
-
-      //   loadingTask.promise.then(
-      //     (pdf) => {
-      //       const pageNumber = 1
-
-      //       pdf.getPage(pageNumber).then((page) => {
-      //         const scale = 1
-      //         const viewport = page.getViewport({ scale })
-
-      //         canvasRef.current.height = viewport.height
-      //         canvasRef.current.width = viewport.width
-
-      //         const renderContext = {
-      //           viewport,
-      //           canvasContext: canvasRef.current.getContext("2d"),
-      //         }
-
-      //         const renderTask = page.render(renderContext)
-
-      //         renderTask.promise.then(() => {
-      //           console.log("Page rendered")
-      //         })
-      //       })
-      //     },
-      //     (reason) => console.error(reason)
-      //   )
-      // }
-
-      // fileReader.readAsArrayBuffer(file)
+      console.log(file)
+      setFile(file)
+      setCurrentStep(1)
     } else {
       setMessage("檔案格式錯誤，請重新選擇")
       setWrong(true)
     }
   }
+
+  const fileUploaderSetting = {
+    handleChange: handlePdf,
+    name: "file",
+    hoverTitle: "拖曳至此",
+    children:<div className="upload-btn">選擇檔案</div>,
+    classes: "drop_area",
+  }
   return (
     <Step1Wrapper>
       <h1>請由此處上傳簽署檔案</h1>
       <img src={upload} alt="" />
-      <label className="upload-btn">
-        <input
-          ref={fileRef}
-          onChange={handlePdf}
-          id="file"
-          type="file"
-          style={{ display: "none" }}
-        />
-        選擇檔案
-      </label>
+      <FileUploader {...fileUploaderSetting} />
       <h2>或直接拖放檔案進來</h2>
     </Step1Wrapper>
   )
 }
 const Step1Wrapper = styled.div`
+  position: relative;
   width: 100%;
   flex-grow: 1;
   display: flex;
@@ -80,8 +47,9 @@ const Step1Wrapper = styled.div`
   background: #fff;
   box-shadow: 0px 2px 6px rgba(105, 122, 141, 0.1);
   border-radius: 10px;
-  padding: 40px;
+  margin-bottom: 25px;
   h1 {
+    margin-top: 40px;
     font-size: 26px;
     color: #252525;
   }
@@ -95,6 +63,10 @@ const Step1Wrapper = styled.div`
     max-height: 300px;
     margin: 75px 0;
   }
+  .drop_area {
+
+
+  }
   .upload-btn {
     display: flex;
     align-items: center;
@@ -104,14 +76,13 @@ const Step1Wrapper = styled.div`
     border: 1px solid #696cff;
     background: #fff;
     border-radius: 5px;
-    font-size: 16px;
     color: #696cff;
+    margin-bottom: 20px;
     cursor: pointer;
     :hover {
       background: #696cff;
       color: #fff;
     }
-    margin-bottom: 20px;
   }
 `
 export default Step1

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, Fragment } from "react"
 import styled from "styled-components"
 import Step1 from "./components/Step1"
 import Step2 from "./components/Step2"
@@ -10,17 +10,29 @@ const Sign = () => {
   const [signatureImg, setSignatureImg] = useState(null)
   const [message, setMessage] = useState("")
   const [wrong, setWrong] = useState(false)
+  const [file, setFile] = useState(null)
+  const [fileName, setFileName] = useState("")
+
   const steps = ["上傳檔案", "進行簽署", "預覽儲存"]
   const step = {
     0: (
       <Step1
         setCurrentStep={setCurrentStep}
-        setSignatureImg={setSignatureImg}
         setMessage={setMessage}
         setWrong={setWrong}
+        setFile={setFile}
       />
     ),
-    1: <Step2 signatureImg={signatureImg} setCurrentStep={setCurrentStep} />,
+    1: (
+      <Step2
+        file={file}
+        fileName={fileName}
+        setFileName={setFileName}
+        signatureImg={signatureImg}
+        setSignatureImg={setSignatureImg}
+        setCurrentStep={setCurrentStep}
+      />
+    ),
     2: <Step3 />,
   }
 
@@ -36,13 +48,13 @@ const Sign = () => {
     <SignWrapper>
       <Steps>
         {steps.map((v, i) => (
-          <>
+          <Fragment key={i}>
             <Step currentStep={currentStep} step={i}>
               <div className="num">{i + 1}</div>
               <p>{v}</p>
             </Step>
             {i !== 2 && <div className="bar" />}
-          </>
+          </Fragment>
         ))}
       </Steps>
       {step[currentStep]}
