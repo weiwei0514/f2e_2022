@@ -33,7 +33,7 @@ const Sign = () => {
         setCurrentStep={setCurrentStep}
       />
     ),
-    2: <Step3 />
+    2: <Step3 fileName={fileName} />
   }
 
   // 錯誤訊息
@@ -67,7 +67,6 @@ const Sign = () => {
 }
 const SignWrapper = styled.div`
   position: relative;
-  height: 100%;
   .message {
     display: flex;
     align-items: center;

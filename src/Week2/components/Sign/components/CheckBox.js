@@ -1,7 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-const CheckBox = ({ fileName, setCurrentStep, onModalClose }) => {
+const CheckBox = ({ fileName, setCurrentStep, onModalClose, saveToImg }) => {
   const checkHandler = () => {
+    saveToImg()
     setCurrentStep(2)
     onModalClose()
   }
