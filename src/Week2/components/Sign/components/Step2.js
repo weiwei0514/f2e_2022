@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react'
-import styled from 'styled-components'
-import { MdModeEditOutline } from 'react-icons/md'
-import { pdfjs } from 'react-pdf'
-import { fabric } from 'fabric'
-import { TbSignature, TbArrowBackUp } from 'react-icons/tb'
-import { BiCalendar } from 'react-icons/bi'
-import { CgFormatText } from 'react-icons/cg'
-import ReactModal from 'common/ReactModal'
-import Signature from './Signature'
-import { useCallback } from 'react'
+import React, { useState, useEffect, useRef } from "react"
+import styled from "styled-components"
+import { MdModeEditOutline } from "react-icons/md"
+import { pdfjs } from "react-pdf"
+import { fabric } from "fabric"
+import { TbSignature, TbArrowBackUp } from "react-icons/tb"
+import { BiCalendar } from "react-icons/bi"
+import { CgFormatText } from "react-icons/cg"
+import ReactModal from "common/ReactModal"
+import Signature from "./Signature"
+import CheckBox from "./CheckBox"
+import { useCallback } from "react"
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
-const Base64Prefix = 'data:application/pdf;base64,'
+const Base64Prefix = "data:application/pdf;base64,"
 const Step2 = ({
   file,
   setCurrentStep,
@@ -22,14 +23,15 @@ const Step2 = ({
   const [isEdit, setIsEdit] = useState(false)
   const [signPopup, setSignPopup] = useState(false)
   const [canvas, setCanvas] = useState(null)
+  const [checkBox, setCheckBox] = useState(false)
   const canvasRef = useRef(null)
 
   // 使用原生 FileReader 轉檔
   function readBlob(blob) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader()
-      reader.addEventListener('load', () => resolve(reader.result))
-      reader.addEventListener('error', reject)
+      reader.addEventListener("load", () => resolve(reader.result))
+      reader.addEventListener("error", reject)
       reader.readAsDataURL(blob)
     })
   }
@@ -47,8 +49,8 @@ const Step2 = ({
 
     // 設定尺寸及產生 canvas
     const viewport = pdfPage.getViewport({ scale: window.devicePixelRatio })
-    const canvas = document.createElement('canvas')
-    const context = canvas.getContext('2d')
+    const canvas = document.createElement("canvas")
+    const context = canvas.getContext("2d")
 
     // 設定 PDF 所要顯示的寬高及渲染
     canvas.height = viewport.height
@@ -69,7 +71,7 @@ const Step2 = ({
 
     // 回傳圖片
     return new fabric.Image(pdfData, {
-      id: 'renderPDF',
+      id: "renderPDF",
       scaleX: scale,
       scaleY: scale,
     })
@@ -112,7 +114,7 @@ const Step2 = ({
 
   useEffect(() => {
     if (!file) return
-    setFileName(file.name.split('.pdf')[0])
+    setFileName(file.name.split(".pdf")[0])
   }, [file, setFileName])
 
   return (
@@ -134,7 +136,7 @@ const Step2 = ({
           <div className="cancel" onClick={() => setCurrentStep(0)}>
             取消
           </div>
-          <div className="next">下一步</div>
+          <div className="next" onClick={() => setCheckBox(true)}>下一步</div>
         </div>
       </TitleArea>
       <PdfArea>
@@ -162,6 +164,13 @@ const Step2 = ({
         <Signature
           onModalClose={() => setSignPopup(false)}
           setSignatureImg={setSignatureImg}
+        />
+      </ReactModal>
+      <ReactModal isOpen={checkBox} onModalClose={() => setCheckBox(false)}>
+        <CheckBox
+          onModalClose={() => setCheckBox(false)}
+          fileName={fileName}
+          setCurrentStep={setCurrentStep}
         />
       </ReactModal>
     </Step2Wrapper>

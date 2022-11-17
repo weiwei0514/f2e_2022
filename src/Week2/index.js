@@ -13,7 +13,7 @@ import Support from 'Week2/components/Support'
 import Sign from 'Week2/components/Sign'
 
 const Week2 = () => {
-  const [mainArea, setMainArea] = useState('Home')
+  const [mainArea, setMainArea] = useState('Sign')
   const main = {
     Home: <Home />,
     Files: <Files />,
