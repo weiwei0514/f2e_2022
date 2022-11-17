@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import styled from 'styled-components'
 import { MdModeEditOutline } from 'react-icons/md'
 import { pdfjs } from 'react-pdf'
@@ -9,7 +9,8 @@ import { CgFormatText } from 'react-icons/cg'
 import ReactModal from 'common/ReactModal'
 import Signature from './Signature'
 import CheckBox from './CheckBox'
-import { useCallback } from 'react'
+import { useKeyPress } from 'useHooks'
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
 const Base64Prefix = 'data:application/pdf;base64,'
 const Step2 = ({
@@ -25,6 +26,7 @@ const Step2 = ({
   const [canvas, setCanvas] = useState(null)
   const [checkBox, setCheckBox] = useState(false)
   const canvasRef = useRef(null)
+  const pressEnter = useKeyPress('Enter')
 
   // 使用原生 FileReader 轉檔
   function readBlob(blob) {
@@ -116,7 +118,7 @@ const Step2 = ({
   const saveToImg = () => {
     // 將 canvas 存為圖片
     const image = canvas.toDataURL('image/png')
-    localStorage.setItem("img", image)
+    localStorage.setItem('img', image)
   }
 
   /** pdf檔名初始化 */
@@ -124,6 +126,13 @@ const Step2 = ({
     if (!file) return
     setFileName(file.name.split('.pdf')[0])
   }, [file, setFileName])
+
+  /** 改名監控鍵盤 */
+  useEffect(() => {
+    if (pressEnter && isEdit) {
+      setIsEdit(false)
+    }
+  }, [pressEnter,isEdit])
 
   return (
     <Step2Wrapper>
@@ -238,9 +247,7 @@ const TitleArea = styled.div`
 `
 
 const PdfArea = styled.div`
-
   margin: 0 auto 0;
-
 `
 
 const Toolbar = styled.div`
